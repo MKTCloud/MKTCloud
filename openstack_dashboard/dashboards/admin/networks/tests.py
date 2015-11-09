@@ -1,5 +1,5 @@
 # vim: tabstop=4 shiftwidth=4 softtabstop=4
-#
+
 # Copyright 2012 NEC Corporation
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -245,7 +245,7 @@ class NetworkTests(test.TestCase):
                      # subnet
                      'with_subnet': False}
         form_data.update(form_data_no_subnet())
-        url = reverse('horizon:project:networks:create')
+        url = reverse('/create')
         res = self.client.post(url, form_data)
 
         self.assertNoFormErrors(res)
@@ -273,7 +273,7 @@ class NetworkTests(test.TestCase):
                      'admin_state': network.admin_state_up,
                      'with_subnet': True}
         form_data.update(form_data_subnet(subnet, allocation_pools=[]))
-        url = reverse('horizon:project:networks:create')
+        url = reverse('/create')
         res = self.client.post(url, form_data)
 
         self.assertNoFormErrors(res)
@@ -292,7 +292,7 @@ class NetworkTests(test.TestCase):
                      # subnet
                      'with_subnet': False}
         form_data.update(form_data_no_subnet())
-        url = reverse('horizon:project:networks:create')
+        url = reverse('/create')
         res = self.client.post(url, form_data)
 
         self.assertNoFormErrors(res)
@@ -311,7 +311,7 @@ class NetworkTests(test.TestCase):
                      'admin_state': network.admin_state_up,
                      'with_subnet': True}
         form_data.update(form_data_subnet(subnet, allocation_pools=[]))
-        url = reverse('horizon:project:networks:create')
+        url = reverse('/create')
         res = self.client.post(url, form_data)
 
         self.assertNoFormErrors(res)
@@ -342,7 +342,7 @@ class NetworkTests(test.TestCase):
                      'admin_state': network.admin_state_up,
                      'with_subnet': True}
         form_data.update(form_data_subnet(subnet, allocation_pools=[]))
-        url = reverse('horizon:project:networks:create')
+        url = reverse('/create')
         res = self.client.post(url, form_data)
 
         self.assertNoFormErrors(res)
@@ -358,7 +358,7 @@ class NetworkTests(test.TestCase):
                      'with_subnet': True}
         form_data.update(form_data_subnet(subnet, cidr='',
                                           allocation_pools=[]))
-        url = reverse('horizon:project:networks:create')
+        url = reverse('/reate')
         res = self.client.post(url, form_data)
 
         self.assertContains(res, escape('Specify "Network Address" or '
@@ -373,7 +373,7 @@ class NetworkTests(test.TestCase):
                      'with_subnet': True}
         form_data.update(form_data_subnet(subnet, cidr='10.0.0.0',
                                           allocation_pools=[]))
-        url = reverse('horizon:project:networks:create')
+        url = reverse('/create')
         res = self.client.post(url, form_data)
 
         expected_msg = "The subnet in the Network Address is too small (/32)."
@@ -391,7 +391,7 @@ class NetworkTests(test.TestCase):
                      'with_subnet': True}
         form_data.update(form_data_subnet(subnet, cidr=cidr,
                                           allocation_pools=[]))
-        url = reverse('horizon:project:networks:create')
+        url = reverse('/create')
         res = self.client.post(url, form_data)
 
         expected_msg = 'Network Address and IP version are inconsistent.'
@@ -409,7 +409,7 @@ class NetworkTests(test.TestCase):
                      'with_subnet': True}
         form_data.update(form_data_subnet(subnet, gateway_ip=gateway_ip,
                                           allocation_pools=[]))
-        url = reverse('horizon:project:networks:create')
+        url = reverse('/create')
         res = self.client.post(url, form_data)
 
         self.assertContains(res, 'Gateway IP and IP version are inconsistent.')
