@@ -65,7 +65,7 @@ class DeleteNetwork(CheckNetworkEditable, tables.DeleteAction):
 class CreateNetwork(tables.LinkAction):
     name = "create"
     verbose_name = _("Create Network")
-    url = "horizon:project:networks:create"
+    url = "horizon:admin:networks:create"
     classes = ("ajax-modal", "btn-create")
 
 
