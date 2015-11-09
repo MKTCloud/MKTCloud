@@ -28,7 +28,7 @@ from openstack_dashboard import api
 
 
 class NetworkTopology(TemplateView):
-    template_name = 'project/network_topology/index.html'
+    template_name = 'admin/network_topology/index.html'
 
 
 class JSONView(View):
@@ -55,7 +55,7 @@ class JSONView(View):
         data['servers'] = [{'name': server.name,
                             'status': server.status,
                             'id': server.id} for server in servers]
-        self.add_resource_url('horizon:project:instances:detail',
+        self.add_resource_url('horizon:admin:instances:detail',
                               data['servers'])
         # Get quantum data
         quantumclient = api.quantum.quantumclient(request)
@@ -66,11 +66,11 @@ class JSONView(View):
         data['networks'] = sorted(networks.get('networks', []),
                                   key=lambda x: x.get('router:external'),
                                   reverse=True)
-        self.add_resource_url('horizon:project:networks:detail',
+        self.add_resource_url('horizon:admin:networks:detail',
                               data['networks'])
         data['subnets'] = subnets.get('subnets', [])
         data['ports'] = ports.get('ports', [])
-        self.add_resource_url('horizon:project:networks:ports:detail',
+        self.add_resource_url('horizon:admin:networks:ports:detail',
                               data['ports'])
         data['routers'] = routers.get('routers', [])
         # user can't see port on external network. so we are
@@ -93,7 +93,7 @@ class JSONView(View):
                          'fixed_ips': []}
             data['ports'].append(fake_port)
 
-        self.add_resource_url('horizon:project:routers:detail',
+        self.add_resource_url('horizon:admin:routers:detail',
                               data['routers'])
         json_string = simplejson.dumps(data, ensure_ascii=False)
         return HttpResponse(json_string, mimetype='text/json')
