@@ -108,6 +108,22 @@ msgstr "虚拟数据中心"
 msgid "Monitor"
 msgstr "监控报警"
 
+#: dashboards/monitor/monitor/tabs.py:17
+#: dashboards/monitor/monitor/monitor_indicators/tables.py:19
+msgid "Monitor Indicators"
+msgstr "监控指标"
+
+#: dashboards/monitor/monitor/tabs.py:27
+#: dashboards/monitor/monitor/alarm/tables.py:19
+msgid "Alarm"
+msgstr "报警"
+
+#: dashboards/monitor/monitor/tabs.py:17
+#: dashboards/monitor/monitor/combination_alarm/tables.py:19
+msgid "Combination Alarm"
+msgstr "组合报警"
+
+
 #: dashboards/monitor/notice/panel.py:9
 msgid "Notice"
 msgstr "通知列表"
@@ -1846,6 +1862,7 @@ msgstr "无法检索安全组"
 #: dashboards/project/access_and_security/keypairs/tables.py:60
 msgid "Keypairs"
 msgstr "密钥对"
+
 
 #: dashboards/project/access_and_security/tabs.py:66
 msgid "Unable to retrieve keypair list."

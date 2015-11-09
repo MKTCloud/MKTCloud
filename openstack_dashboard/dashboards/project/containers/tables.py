@@ -60,7 +60,7 @@ class DeleteContainer(tables.DeleteAction):
 class CreateContainer(tables.LinkAction):
     name = "create"
     verbose_name = _("Create Container")
-    url = "#"
+    url = "horizon:project:containers:create"
     classes = ("ajax-modal", "btn-create")
 
 
