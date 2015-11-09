@@ -16,12 +16,11 @@
 
 from django.conf.urls.defaults import patterns, url
 
-from openstack_dashboard.dashboards.project.networks.subnets.views import \
-        DetailView
+from .views import DetailView
 
 
 SUBNETS = r'^(?P<subnet_id>[^/]+)/%s$'
-VIEW_MOD = 'openstack_dashboard.dashboards.admin.networks.subnets.views'
+VIEW_MOD = 'openstack_dashboard.dashboards.project.networks.subnets.views'
 
 
 urlpatterns = patterns(VIEW_MOD,

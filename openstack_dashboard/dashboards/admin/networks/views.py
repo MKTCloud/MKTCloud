@@ -14,22 +14,25 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
+"""
+Views for managing Quantum Networks.
+"""
 import logging
 
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.utils.datastructures import SortedDict
 
 from horizon import exceptions
 from horizon import forms
 from horizon import tables
+from horizon import workflows
 
 from openstack_dashboard import api
-from openstack_dashboard.dashboards.project.networks import views as user_views
 from .tables import NetworksTable
 from .subnets.tables import SubnetsTable
 from .ports.tables import PortsTable
-from .forms import CreateNetwork, UpdateNetwork
+from .forms import UpdateNetwork
+from .workflows import CreateNetwork
 
 
 LOG = logging.getLogger(__name__)
@@ -39,53 +42,69 @@ class IndexView(tables.DataTableView):
     table_class = NetworksTable
     template_name = 'admin/networks/index.html'
 
-    def _get_tenant_list(self):
-        if not hasattr(self, "_tenants"):
-            try:
-                tenants = api.keystone.tenant_list(self.request, admin=True)
-            except:
-                tenants = []
-                msg = _('Unable to retrieve instance tenant information.')
-                exceptions.handle(self.request, msg)
-
-            tenant_dict = SortedDict([(t.id, t) for t in tenants])
-            self._tenants = tenant_dict
-        return self._tenants
-
     def get_data(self):
         try:
-            networks = api.quantum.network_list(self.request)
+            tenant_id = self.request.user.tenant_id
+            networks = api.quantum.network_list_for_tenant(self.request,
+                                                           tenant_id)
         except:
             networks = []
             msg = _('Network list can not be retrieved.')
             exceptions.handle(self.request, msg)
-        if networks:
-            tenant_dict = self._get_tenant_list()
-            for n in networks:
-                # Set tenant name
-                tenant = tenant_dict.get(n.tenant_id, None)
-                n.tenant_name = getattr(tenant, 'name', None)
-                # If name is empty use UUID as name
-                n.set_id_as_name_if_empty()
+        for n in networks:
+            n.set_id_as_name_if_empty()
         return networks
 
 
-class CreateView(forms.ModalFormView):
-    form_class = CreateNetwork
+class CreateView(workflows.WorkflowView):
+    workflow_class = CreateNetwork
     template_name = 'admin/networks/create.html'
-    success_url = reverse_lazy('horizon:admin:networks:index')
+
+    def get_initial(self):
+        pass
+
+
+class UpdateView(forms.ModalFormView):
+    form_class = UpdateNetwork
+    template_name = 'admin/networks/update.html'
+    context_object_name = 'network'
+    success_url = reverse_lazy("horizon:admin:networks:index")
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateView, self).get_context_data(**kwargs)
+        context["network_id"] = self.kwargs['network_id']
+        return context
+
+    def _get_object(self, *args, **kwargs):
+        if not hasattr(self, "_object"):
+            network_id = self.kwargs['network_id']
+            try:
+                self._object = api.quantum.network_get(self.request,
+                                                       network_id)
+            except:
+                redirect = self.success_url
+                msg = _('Unable to retrieve network details.')
+                exceptions.handle(self.request, msg, redirect=redirect)
+        return self._object
+
+    def get_initial(self):
+        network = self._get_object()
+        return {'network_id': network['id'],
+                'tenant_id': network['tenant_id'],
+                'name': network['name'],
+                'admin_state': network['admin_state_up']}
 
 
 class DetailView(tables.MultiTableView):
     table_classes = (SubnetsTable, PortsTable)
-    template_name = 'project/networks/detail.html'
+    template_name = 'admin/networks/detail.html'
     failure_url = reverse_lazy('horizon:admin:networks:index')
 
     def get_subnets_data(self):
         try:
-            network_id = self.kwargs['network_id']
+            network = self._get_data()
             subnets = api.quantum.subnet_list(self.request,
-                                              network_id=network_id)
+                                              network_id=network.id)
         except:
             subnets = []
             msg = _('Subnet list can not be retrieved.')
@@ -113,11 +132,9 @@ class DetailView(tables.MultiTableView):
                 network = api.quantum.network_get(self.request, network_id)
                 network.set_id_as_name_if_empty(length=0)
             except:
-                redirect = self.failure_url
-                exceptions.handle(self.request,
-                                  _('Unable to retrieve details for '
-                                    'network "%s".') % network_id,
-                                    redirect=redirect)
+                msg = _('Unable to retrieve details for network "%s".') \
+                      % (network_id)
+                exceptions.handle(self.request, msg, redirect=self.failure_url)
             self._network = network
         return self._network
 
@@ -125,18 +142,3 @@ class DetailView(tables.MultiTableView):
         context = super(DetailView, self).get_context_data(**kwargs)
         context["network"] = self._get_data()
         return context
-
-
-class UpdateView(user_views.UpdateView):
-    form_class = UpdateNetwork
-    template_name = 'admin/networks/update.html'
-    success_url = reverse_lazy('horizon:admin:networks:index')
-
-    def get_initial(self):
-        network = self._get_object()
-        return {'network_id': network['id'],
-                'tenant_id': network['tenant_id'],
-                'name': network['name'],
-                'admin_state': network['admin_state_up'],
-                'shared': network['shared'],
-                'external': network['router__external']}

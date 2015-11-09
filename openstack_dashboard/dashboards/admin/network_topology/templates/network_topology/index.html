@@ -23,7 +23,7 @@ div.network .device:hover div.port {
 {% trans "This pane needs javascript support." %}
 </noscript>
 <div class="launchButtons">
-<a href="{% url horizon:admin:instances:launch %}" id="instances__action_launch" class="btn btn-small btn-launch ajax-modal">{%trans "Launch Instance" %}</a>
+<a href="{% url horizon:project:instances:launch %}" id="instances__action_launch" class="btn btn-small btn-launch ajax-modal">{%trans "Launch Instance" %}</a>
 <a href="{% url horizon:admin:networks:create %}" id="networks__action_create" class="btn btn-small ajax-modal btn-create">{%trans "Create Network" %}</a>
 <a href="{% url horizon:admin:routers:create %}" id="Routers__action_create" class="btn btn-small ajax-modal btn-create">{%trans "Create Router" %}</a>
 </div>

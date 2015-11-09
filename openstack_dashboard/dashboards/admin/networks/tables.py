@@ -13,9 +13,9 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
-
 import logging
 
+from django import template
 from django.core.urlresolvers import reverse
 from django.template import defaultfilters as filters
 from django.utils.translation import ugettext_lazy as _
@@ -24,49 +24,75 @@ from horizon import exceptions
 from horizon import tables
 
 from openstack_dashboard import api
-from openstack_dashboard.dashboards.project.networks.tables import get_subnets
 
 
 LOG = logging.getLogger(__name__)
 
 
-class DeleteNetwork(tables.DeleteAction):
+class CheckNetworkEditable(object):
+    """Mixin class to determine the specified network is editable."""
+
+    def allowed(self, request, datum=None):
+        # Only administrator is allowed to create and manage shared networks.
+        if datum and datum.shared:
+            return False
+        return True
+
+
+class DeleteNetwork(CheckNetworkEditable, tables.DeleteAction):
     data_type_singular = _("Network")
     data_type_plural = _("Networks")
 
-    def delete(self, request, obj_id):
+    def delete(self, request, network_id):
         try:
-            api.quantum.network_delete(request, obj_id)
+            # Retrieve existing subnets belonging to the network.
+            subnets = api.quantum.subnet_list(request, network_id=network_id)
+            LOG.debug('Network %s has subnets: %s' %
+                      (network_id, [s.id for s in subnets]))
+            for s in subnets:
+                api.quantum.subnet_delete(request, s.id)
+                LOG.debug('Deleted subnet %s' % s.id)
+
+            api.quantum.network_delete(request, network_id)
+            LOG.debug('Deleted network %s successfully' % network_id)
         except:
-            msg = _('Failed to delete network %s') % obj_id
+            msg = _('Failed to delete network %s') % network_id
             LOG.info(msg)
-            redirect = reverse('horizon:admin:networks:index')
+            redirect = reverse("horizon:project:networks:index")
             exceptions.handle(request, msg, redirect=redirect)
 
 
 class CreateNetwork(tables.LinkAction):
     name = "create"
     verbose_name = _("Create Network")
-    url = "horizon:admin:networks:create"
+    url = "horizon:project:networks:create"
     classes = ("ajax-modal", "btn-create")
 
 
-class EditNetwork(tables.LinkAction):
+class EditNetwork(CheckNetworkEditable, tables.LinkAction):
     name = "update"
     verbose_name = _("Edit Network")
-    url = "horizon:admin:networks:update"
+    url = "horizon:project:networks:update"
     classes = ("ajax-modal", "btn-edit")
 
 
-#def _get_subnets(network):
-#    cidrs = [subnet.get('cidr') for subnet in network.subnets]
-#    return ','.join(cidrs)
+class CreateSubnet(CheckNetworkEditable, tables.LinkAction):
+    name = "subnet"
+    verbose_name = _("Add Subnet")
+    url = "horizon:project:networks:addsubnet"
+    classes = ("ajax-modal", "btn-create")
+
+
+def get_subnets(network):
+    template_name = 'project/networks/_network_ips.html'
+    context = {"subnets": network.subnets}
+    return template.loader.render_to_string(template_name, context)
 
 
 class NetworksTable(tables.DataTable):
-    tenant = tables.Column("tenant_name", verbose_name=_("Project"))
-    name = tables.Column("name", verbose_name=_("Network Name"),
-                         link='horizon:admin:networks:detail')
+    name = tables.Column("name",
+                         verbose_name=_("Name"),
+                         link='horizon:project:networks:detail')
     subnets = tables.Column(get_subnets,
                             verbose_name=_("Subnets Associated"),)
     shared = tables.Column("shared", verbose_name=_("Shared"),
@@ -79,4 +105,4 @@ class NetworksTable(tables.DataTable):
         name = "networks"
         verbose_name = _("Networks")
         table_actions = (CreateNetwork, DeleteNetwork)
-        row_actions = (EditNetwork, DeleteNetwork)
+        row_actions = (EditNetwork, CreateSubnet, DeleteNetwork)
