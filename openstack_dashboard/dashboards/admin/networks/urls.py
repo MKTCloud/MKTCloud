@@ -15,14 +15,12 @@
 #    under the License.
 
 from django.conf.urls.defaults import patterns, url, include
-from .views import IndexView, CreateView, DetailView, UpdateView
 
+from .views import IndexView, CreateView, DetailView, UpdateView
 from .subnets.views import CreateView as AddSubnetView
 from .subnets.views import UpdateView as EditSubnetView
-from .ports.views import CreateView as AddPortView
-from .ports.views import UpdateView as EditPortView
-
 from .subnets import urls as subnet_urls
+from .ports.views import UpdateView as EditPortView
 from .ports import urls as port_urls
 
 
@@ -31,17 +29,14 @@ NETWORKS = r'^(?P<network_id>[^/]+)/%s$'
 
 urlpatterns = patterns('',
     url(r'^$', IndexView.as_view(), name='index'),
-    url(r'^create/$', CreateView.as_view(), name='create'),
-    url(NETWORKS % 'update', UpdateView.as_view(), name='update'),
-    # for detail view
+    url(r'^create$', CreateView.as_view(), name='create'),
     url(NETWORKS % 'detail', DetailView.as_view(), name='detail'),
+    url(NETWORKS % 'update', UpdateView.as_view(), name='update'),
     url(NETWORKS % 'subnets/create', AddSubnetView.as_view(),
         name='addsubnet'),
-    url(NETWORKS % 'ports/create', AddPortView.as_view(), name='addport'),
     url(r'^(?P<network_id>[^/]+)/subnets/(?P<subnet_id>[^/]+)/update$',
         EditSubnetView.as_view(), name='editsubnet'),
     url(r'^(?P<network_id>[^/]+)/ports/(?P<port_id>[^/]+)/update$',
         EditPortView.as_view(), name='editport'),
-
     url(r'^subnets/', include(subnet_urls, namespace='subnets')),
     url(r'^ports/', include(port_urls, namespace='ports')))

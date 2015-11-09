@@ -31,19 +31,19 @@ LOG = logging.getLogger(__name__)
 class OverviewTab(tabs.Tab):
     name = _("Overview")
     slug = "overview"
-    template_name = "project/networks/ports/_detail_overview.html"
+    template_name = "project/networks/subnets/_detail_overview.html"
 
     def get_context_data(self, request):
-        port_id = self.tab_group.kwargs['port_id']
+        subnet_id = self.tab_group.kwargs['subnet_id']
         try:
-            port = api.quantum.port_get(self.request, port_id)
+            subnet = api.quantum.subnet_get(self.request, subnet_id)
         except:
             redirect = reverse('horizon:project:networks:index')
-            msg = _('Unable to retrieve port details.')
+            msg = _('Unable to retrieve subnet details.')
             exceptions.handle(request, msg, redirect=redirect)
-        return {'port': port}
+        return {'subnet': subnet}
 
 
-class PortDetailTabs(tabs.TabGroup):
-    slug = "port_details"
+class SubnetDetailTabs(tabs.TabGroup):
+    slug = "subnet_details"
     tabs = (OverviewTab,)

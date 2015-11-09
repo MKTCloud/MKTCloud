@@ -17,50 +17,34 @@
 import logging
 
 from django.core.urlresolvers import reverse
+from django import template
 from django.utils.translation import ugettext_lazy as _
 
-from horizon import exceptions
 from horizon import tables
-
-from openstack_dashboard import api
-from openstack_dashboard.dashboards.project.networks.ports.tables import \
-        get_fixed_ips, get_attached
 
 
 LOG = logging.getLogger(__name__)
 
 
-class DeletePort(tables.DeleteAction):
-    data_type_singular = _("Port")
-    data_type_plural = _("Ports")
-
-    def delete(self, request, obj_id):
-        try:
-            api.quantum.port_delete(request, obj_id)
-        except:
-            msg = _('Failed to delete subnet %s') % obj_id
-            LOG.info(msg)
-            network_id = self.table.kwargs['network_id']
-            redirect = reverse('horizon:admin:networks:detail',
-                               args=[network_id])
-            exceptions.handle(request, msg, redirect=redirect)
+def get_fixed_ips(port):
+    template_name = 'project/networks/ports/_port_ips.html'
+    context = {"ips": port.fixed_ips}
+    return template.loader.render_to_string(template_name, context)
 
 
-class CreatePort(tables.LinkAction):
-    name = "create"
-    verbose_name = _("Create Port")
-    url = "horizon:admin:networks:addport"
-    classes = ("ajax-modal", "btn-create")
-
-    def get_link_url(self, datum=None):
-        network_id = self.table.kwargs['network_id']
-        return reverse(self.url, args=(network_id,))
+def get_attached(port):
+    if port['device_owner']:
+        return port['device_owner']
+    elif port['device_id']:
+        return _('Attached')
+    else:
+        return _('Detached')
 
 
 class UpdatePort(tables.LinkAction):
     name = "update"
     verbose_name = _("Edit Port")
-    url = "horizon:admin:networks:editport"
+    url = "horizon:project:networks:editport"
     classes = ("ajax-modal", "btn-edit")
 
     def get_link_url(self, port):
@@ -71,15 +55,17 @@ class UpdatePort(tables.LinkAction):
 class PortsTable(tables.DataTable):
     name = tables.Column("name",
                          verbose_name=_("Name"),
-                         link="horizon:admin:networks:ports:detail")
+                         link="horizon:project:networks:ports:detail")
     fixed_ips = tables.Column(get_fixed_ips, verbose_name=_("Fixed IPs"))
-    device_id = tables.Column(get_attached, verbose_name=_("Device Attached"))
+    attached = tables.Column(get_attached, verbose_name=_("Attached Device"))
     status = tables.Column("status", verbose_name=_("Status"))
     admin_state = tables.Column("admin_state",
                                 verbose_name=_("Admin State"))
 
+    def get_object_display(self, port):
+        return port.id
+
     class Meta:
         name = "ports"
         verbose_name = _("Ports")
-        table_actions = (CreatePort, DeletePort)
-        row_actions = (UpdatePort, DeletePort,)
+        row_actions = (UpdatePort,)

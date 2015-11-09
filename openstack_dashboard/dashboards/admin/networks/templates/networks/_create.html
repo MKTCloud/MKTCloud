@@ -2,9 +2,8 @@
 {% load i18n %}
 
 {% block form_id %}create_network_form{% endblock %}
-{% block form_action %}{% url horizon:admin:networks:create %}{% endblock %}
+{% block form_action %}{% url horizon:project:networks:create %}{% endblock %}
 
-{% block modal_id %}create_network_modal{% endblock %}
 {% block modal-header %}{% trans "Create Network" %}{% endblock %}
 
 {% block modal-body %}
@@ -21,5 +20,5 @@
 
 {% block modal-footer %}
   <input class="btn btn-primary pull-right" type="submit" value="{% trans "Create Network" %}" />
-  <a href="{% url horizon:admin:networks:index %}" class="btn secondary cancel close">{% trans "Cancel" %}</a>
+  <a href="{% url horizon:project:networks:index %}" class="btn secondary cancel close">{% trans "Cancel" %}</a>
 {% endblock %}
