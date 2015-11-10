@@ -24,8 +24,8 @@ from openstack_dashboard.dashboards.project.images_and_snapshots \
 
 
 class AdminCreateImage(CreateImage):
-   # url = "horizon:admin:images:create"
-     url = "#modalConfirm"
+    url = "horizon:admin:images:create"
+   #  url = "create/#modalConfirm"
 
 class AdminDeleteImage(DeleteImage):
     def allowed(self, request, image=None):

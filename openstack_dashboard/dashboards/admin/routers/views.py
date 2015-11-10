@@ -41,7 +41,7 @@ LOG = logging.getLogger(__name__)
 
 class IndexView(tables.DataTableView):
     table_class = RoutersTable
-    template_name = 'project/routers/index.html'
+    template_name = 'admin/routers/index.html'
 
     def _get_routers(self, search_opts=None):
         try:
@@ -92,7 +92,7 @@ class IndexView(tables.DataTableView):
 
 class DetailView(tables.MultiTableView):
     table_classes = (PortsTable, )
-    template_name = 'project/routers/detail.html'
+    template_name = 'admin/routers/detail.html'
     failure_url = reverse_lazy('horizon:project:routers:index')
 
     def _get_data(self):
@@ -143,5 +143,5 @@ class DetailView(tables.MultiTableView):
 
 class CreateView(forms.ModalFormView):
     form_class = CreateForm
-    template_name = 'project/routers/create.html'
+    template_name = 'admin/routers/create.html'
     success_url = reverse_lazy("horizon:project:routers:index")
