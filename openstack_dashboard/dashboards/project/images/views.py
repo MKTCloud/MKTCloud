@@ -38,7 +38,7 @@ LOG = logging.getLogger(__name__)
 
 class IndexView(tables.DataTableView):
     table_class = AdminImagesTable
-    template_name = 'admin/images/index.html'
+    template_name = 'project/images/index.html'
 
     def has_more_data(self, table):
         return self._more
@@ -59,13 +59,13 @@ class IndexView(tables.DataTableView):
 
 
 class CreateView(views.CreateView):
-    template_name = 'admin/images/create.html'
+    template_name = 'project/images/create.html'
     form_class = AdminCreateImageForm
     success_url = reverse_lazy('horizon:admin:images:index')
 
 
 class UpdateView(views.UpdateView):
-    template_name = 'admin/images/update.html'
+    template_name = 'project/images/update.html'
     form_class = AdminUpdateImageForm
     success_url = reverse_lazy('horizon:admin:images:index')
 

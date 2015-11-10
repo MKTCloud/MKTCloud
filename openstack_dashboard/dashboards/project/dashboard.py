@@ -30,7 +30,7 @@ class NetworkPanels(horizon.PanelGroup):
 class Project(horizon.Dashboard):
     name = _("Project")
     slug = "project"
-    panels = ('overview','instances','volumes','images','routers','images_and_snapshots','access_and_security','containers')
+    panels = ('overview','instances','volumes','images','images_and_snapshots','access_and_security','containers')
     default_panel = 'overview'
 
 

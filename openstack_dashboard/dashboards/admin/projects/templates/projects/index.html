@@ -7,5 +7,8 @@
 {% endblock page_header %}
 
 {% block main %}
+  {% block lade %}{% include "horizon/common/_page_lade.html" %}{% endblock lade %}
+  
+  <div class="ccc"></div>
   {{ table.render }}
 {% endblock %}
