@@ -28,6 +28,6 @@ from openstack_dashboard.dashboards.admin import dashboard
 class Users(horizon.Panel):
     name = _("Users")
     slug = 'users'
-
+    stylecss = 'iconfont icon-user'
 
 dashboard.Admin.register(Users)

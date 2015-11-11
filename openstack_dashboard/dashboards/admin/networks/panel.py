@@ -25,5 +25,6 @@ class Networks(horizon.Panel):
     name = _("Networks")
     slug = 'networks'
     permissions = ('openstack.services.network',)
+    stylecss = 'iconfont icon-wifi'
 
 dashboard.Admin.register(Networks)

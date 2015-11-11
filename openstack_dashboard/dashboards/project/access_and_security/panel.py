@@ -25,6 +25,6 @@ from openstack_dashboard.dashboards.project import dashboard
 class AccessAndSecurity(horizon.Panel):
     name = _("Access & Security")
     slug = 'access_and_security'
-
+    stylecss = 'iconfont icon-locked'
 
 dashboard.Project.register(AccessAndSecurity)

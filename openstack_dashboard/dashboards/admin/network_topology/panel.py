@@ -28,5 +28,6 @@ from openstack_dashboard.dashboards.admin import dashboard
 class NetworkTopology(horizon.Panel):
     name = _("Network Topology")
     slug = 'network_topology'
+    stylecss = 'iconfont icon-tree'
 
 dashboard.Admin.register(NetworkTopology)

@@ -29,5 +29,6 @@ class Containers(horizon.Panel):
     name = _("Containers")
     slug = 'containers'
     permissions = ('openstack.services.object-store',)
-
+    stylecss = 'iconfont icon-folderadd'
+   
 dashboard.Project.register(Containers)

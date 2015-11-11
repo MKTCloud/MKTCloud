@@ -8,6 +8,6 @@ from openstack_dashboard.dashboards.monitor import dashboard
 class Notice(horizon.Panel):
     name = _("Notice")
     slug = "notice"
-
+    stylecss = 'iconfont icon-eventnote'
 
 dashboard.Monitor.register(Notice)

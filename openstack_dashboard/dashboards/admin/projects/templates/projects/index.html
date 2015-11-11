@@ -3,12 +3,9 @@
 {% block title %}{% trans "Projects" %}{% endblock %}
 
 {% block page_header %}
-  {% include "horizon/common/_page_header.html" with title=_("Projects") %}
+  {% include "horizon/common/_page_header.html" with stylecss="iconfont icon-mylibrarybooks" title=_("Projects") %}
 {% endblock page_header %}
 
 {% block main %}
-  {% block lade %}{% include "horizon/common/_page_lade.html" %}{% endblock lade %}
-  
-  <div class="ccc"></div>
   {{ table.render }}
 {% endblock %}

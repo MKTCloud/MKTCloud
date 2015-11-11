@@ -28,6 +28,6 @@ from openstack_dashboard.dashboards.admin import dashboard
 class Tenants(horizon.Panel):
     name = _("Projects")
     slug = 'projects'
-
+    stylecss = 'iconfont icon-mylibrarybooks'
 
 dashboard.Admin.register(Tenants)

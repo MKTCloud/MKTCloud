@@ -25,6 +25,6 @@ from openstack_dashboard.dashboards.project import dashboard
 class ImagesAndSnapshots(horizon.Panel):
     name = _("Images & Snapshots")
     slug = 'images_and_snapshots'
-
+    stylecss = 'iconfont icon-cameraalt'
 
 dashboard.Project.register(ImagesAndSnapshots)

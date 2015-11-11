@@ -25,6 +25,6 @@ class Volumes(horizon.Panel):
     name = _("Volumes")
     slug = 'volumes'
     permissions = ('openstack.services.volume',)
-
+    stylecss = 'iconfont icon-storage'
 
 dashboard.Project.register(Volumes)

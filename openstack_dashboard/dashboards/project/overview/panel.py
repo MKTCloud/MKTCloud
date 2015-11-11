@@ -28,6 +28,7 @@ from openstack_dashboard.dashboards.project import dashboard
 class Overview(horizon.Panel):
     name = _("Overview")
     slug = 'overview'
+    stylecss = 'iconfont icon-removeredeye'
 
 
 dashboard.Project.register(Overview)

@@ -37,7 +37,7 @@ if ROOT_PATH not in sys.path:
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-SITE_BRANDING = 'OpenStack Dashboard'
+SITE_BRANDING = 'MKTCLoud'
 
 LOGIN_URL = '/auth/login/'
 LOGOUT_URL = '/auth/logout/'

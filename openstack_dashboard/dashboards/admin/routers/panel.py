@@ -22,8 +22,9 @@ from openstack_dashboard.dashboards.admin import dashboard
 
 
 class Routers(horizon.Panel):
-    name = "Routers"
+    name = _("Routers")
     slug = 'routers'
     permissions = ('openstack.services.network',)
+    stylecss = 'iconfont icon-router'
 
 dashboard.Admin.register(Routers)

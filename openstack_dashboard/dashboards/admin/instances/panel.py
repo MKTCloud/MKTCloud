@@ -29,6 +29,6 @@ class Instances(horizon.Panel):
     name = _("Instances")
     slug = 'instances'
     permissions = ('openstack.roles.admin',)
-
+    stylecss = 'iconfont icon-desktopmac'
 
 dashboard.Admin.register(Instances)
