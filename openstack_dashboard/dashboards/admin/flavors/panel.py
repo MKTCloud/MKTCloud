@@ -28,6 +28,6 @@ from openstack_dashboard.dashboards.admin import dashboard
 class Flavors(horizon.Panel):
     name = _("Flavors")
     slug = 'flavors'
-
+    stylecss = 'iconfont icon-mylibrarybooks'
 
 dashboard.Admin.register(Flavors)

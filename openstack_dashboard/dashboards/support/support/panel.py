@@ -8,6 +8,7 @@ from openstack_dashboard.dashboards.support import dashboard
 class Support(horizon.Panel):
     name = _("Support")
     slug = "support"
+    stylecss = 'iconfont icon-mylibrarybooks'
 
 
 dashboard.Support.register(Support)

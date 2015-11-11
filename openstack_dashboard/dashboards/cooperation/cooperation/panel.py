@@ -8,6 +8,6 @@ from openstack_dashboard.dashboards.cooperation import dashboard
 class Cooperation(horizon.Panel):
     name = _("Cooperation")
     slug = "cooperation"
-
+    stylecss = 'iconfont icon-users'
 
 dashboard.Cooperation.register(Cooperation)

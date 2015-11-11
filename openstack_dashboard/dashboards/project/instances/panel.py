@@ -24,6 +24,6 @@ from openstack_dashboard.dashboards.project import dashboard
 class Instances(horizon.Panel):
     name = _("Instances")
     slug = 'instances'
-
+    stylecss = 'iconfont icon-desktopmac'
 
 dashboard.Project.register(Instances)
