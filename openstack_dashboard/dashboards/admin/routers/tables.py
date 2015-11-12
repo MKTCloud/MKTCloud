@@ -32,7 +32,7 @@ LOG = logging.getLogger(__name__)
 class DeleteRouter(tables.DeleteAction):
     data_type_singular = _("Router")
     data_type_plural = _("Routers")
-    redirect_url = "horizon:project:routers:index"
+    redirect_url = "horizon:admin:routers:index"
 
     def delete(self, request, obj_id):
         obj = self.table.get_object_by_id(obj_id)
@@ -57,14 +57,21 @@ class DeleteRouter(tables.DeleteAction):
 class CreateRouter(tables.LinkAction):
     name = "create"
     verbose_name = _("Create Router")
-    url = "horizon:project:routers:create"
+    url = "create"
     classes = ("ajax-modal", "btn-create")
 
+class CreateMore(tables.LinkAction):
+    name = "more"
+    verbose_name = _("Create More")
+    classes = ('card','card-slategray')
+    attrs={"data-toggle": "modal"}
+    url = "#modalConfirm"
+    classes = ("ajax-modal", "btn-create")    
 
 class SetGateway(tables.LinkAction):
     name = "setgateway"
     verbose_name = _("Set Gateway")
-    url = "horizon:project:routers:setgateway"
+    url = "horizon:admin:routers:setgateway"
     classes = ("ajax-modal", "btn-camera")
 
     def allowed(self, request, datum=None):
@@ -80,7 +87,7 @@ class ClearGateway(tables.BatchAction):
     data_type_singular = _("Gateway")
     data_type_plural = _("Gateways")
     classes = ('btn-danger', 'btn-cleargateway')
-    redirect_url = "horizon:project:routers:index"
+    redirect_url = "horizon:admin:routers:index"
 
     def action(self, request, obj_id):
         obj = self.table.get_object_by_id(obj_id)
@@ -121,7 +128,7 @@ def get_external_network(router):
 class RoutersTable(tables.DataTable):
     name = tables.Column("name",
                          verbose_name=_("Name"),
-                         link="horizon:project:routers:detail")
+                         link="horizon:admin:routers:detail")
     status = tables.Column("status",
                            filters=(title,),
                            verbose_name=_("Status"),
@@ -137,5 +144,5 @@ class RoutersTable(tables.DataTable):
         verbose_name = _("Routers")
         status_columns = ["status"]
         row_class = UpdateRow
-        table_actions = (CreateRouter, DeleteRouter)
+        table_actions = (CreateRouter, DeleteRouter,CreateMore)
         row_actions = (SetGateway, ClearGateway, DeleteRouter)

@@ -57,7 +57,7 @@ class DeleteRouter(tables.DeleteAction):
 class CreateRouter(tables.LinkAction):
     name = "create"
     verbose_name = _("Create Router")
-    url = "horizon:project:routers:create"
+    url = "horizon:admin:routers:create"
     classes = ("ajax-modal", "btn-create")
 
 

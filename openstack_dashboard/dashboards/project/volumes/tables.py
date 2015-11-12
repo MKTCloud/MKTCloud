@@ -62,6 +62,19 @@ class CreateVolume(tables.LinkAction):
     url = "horizon:project:volumes:create"
     classes = ("ajax-modal", "btn-create")
 
+class CreateHost(tables.LinkAction):
+    name = "host"
+    verbose_name = _("Create Host")
+    attrs={"data-toggle": "modal"}
+    url = "#modalConfirm"
+    classes = ("ajax-modal", "btn-create")
+    
+class CreateMore(tables.LinkAction):
+    name = "more"
+    verbose_name = _("Create More")
+    attrs={"data-toggle": "modal"}
+    url = "#modalConfirm"
+    classes = ("ajax-modal", "btn-create")    
 
 class EditAttachments(tables.LinkAction):
     name = "attachments"
@@ -182,7 +195,7 @@ class VolumesTable(VolumesTableBase):
         verbose_name = _("Volumes")
         status_columns = ["status"]
         row_class = UpdateRow
-        table_actions = (CreateVolume, DeleteVolume,)
+        table_actions = (CreateVolume, DeleteVolume,CreateHost,CreateMore)
         row_actions = (EditAttachments, CreateSnapshot, DeleteVolume)
 
 

@@ -370,6 +370,19 @@ class SimpleDisassociateIP(tables.Action):
                               _("Unable to disassociate floating IP."))
         return shortcuts.redirect("horizon:project:instances:index")
 
+class CreateHost(tables.LinkAction):
+    name = "host"
+    verbose_name = _("Create Host")
+    attrs={"data-toggle": "modal"}
+    url = "#modalConfirm"
+    classes = ("ajax-modal", "btn-create")
+    
+class CreateMore(tables.LinkAction):
+    name = "more"
+    verbose_name = _("Create More")
+    attrs={"data-toggle": "modal"}
+    url = "#modalConfirm"
+    classes = ("ajax-modal", "btn-create")    
 
 class UpdateRow(tables.Row):
     ajax = True
@@ -470,7 +483,7 @@ class InstancesTable(tables.DataTable):
         verbose_name = _("Instances")
         status_columns = ["status", "task"]
         row_class = UpdateRow
-        table_actions = (LaunchLink, TerminateInstance)
+        table_actions = (LaunchLink, TerminateInstance,CreateHost,CreateMore)
         row_actions = (ConfirmResize, RevertResize, CreateSnapshot,
                        SimpleAssociateIP, AssociateIP,
                        SimpleDisassociateIP, EditInstance,

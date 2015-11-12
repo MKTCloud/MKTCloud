@@ -25,8 +25,8 @@ from openstack_dashboard import api
 class OverviewTab(tabs.Tab):
     name = _("Overview")
     slug = "overview"
-    template_name = ("project/routers/_detail_overview.html")
-    redirect_url = 'horizon:project:routers:index'
+    template_name = ("admin/routers/_detail_overview.html")
+    redirect_url = 'horizon:admin:routers:index'
 
     def get_context_data(self, request):
         router_id = self.tab_group.kwargs['router_id']

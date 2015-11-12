@@ -1,8 +1,14 @@
 {% load i18n sizeformat %}
-
-<div class="usage_info_wrapper">
+<div class="tile-header color blue">
+	<h1>{% trans "Select a month to query its usage" %}: </h1>
+	<div class="controls">
+		<a href="#" class="minimize"><i class="fa fa-chevron-down"></i></a>
+		<a href="#" class="refresh"><i class="fa fa-refresh"></i></a>
+		<a href="#" class="remove"><i class="fa fa-times"></i></a>
+	</div>
+</div>
+<div class="tile-body no-vpadding">
   <form action="" method="get" id="date_form" class="form-horizontal">
-    <h3>{% trans "Select a month to query its usage" %}: </h3>
     <div class="form-row">
       {{ form.month }}
       {{ form.year }}

@@ -1,7 +1,43 @@
 {% load i18n horizon humanize sizeformat %}
-
-<div class="quota-dynamic">
-  <h3>{% trans "Quota Summary" %}</h3>
+<div class="tile-header color blue">
+	<h1>{% trans "Quota Summary" %}</h1>
+	<div class="search">
+		<input type="text" placeholder="Search...">
+	</div>
+	<div class="controls">
+		<a href="#" class="minimize"><i class="fa fa-chevron-down"></i></a>
+		<a href="#" class="refresh"><i class="fa fa-refresh"></i></a>
+		<a href="#" class="remove"><i class="fa fa-times"></i></a>
+	</div>
+</div>
+<div class="tile-body no-vpadding">
+	<div class="table-responsive">
+		<table class="table table-custom table-sortable nomargin">
+			<thead>
+				<tr>
+					<th class="sortable sort-numeric sort-asc">ID</th>
+					<th class="sortable sort-alpha">名称</th>
+					<th class="sortable">数量</th>
+					<th class="text-right">状态</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>{% trans "Available Instances" %} </td>
+					<td class="progress-cell">
+						<div class="progress-info">
+							<div class="percent"><span class="animate-number" data-value="50" data-animation-duration="1500">{{ usage.quotas.instances.used|intcomma }}</span>{% trans "of" %}<span class="animate-number" data-value="50" data-animation-duration="1500">{{ usage.quotas.instances.quota|intcomma }}</span></div>
+						</div>
+						{% horizon_progress_bar usage.quotas.instances.used usage.quotas.instances.quota %}
+					</td>
+					<td class="text-right"><i class="iconfont icon-correct icon-green"></i> 运行中</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="tile-body no-vpadding">
     <strong>{% trans "Used" %}<span> {{ usage.quotas.instances.used|intcomma }} </span> {% trans "of" %} <span> {{ usage.quotas.instances.quota|intcomma }} </span>{% trans "Available Instances" %} </strong>
     {% horizon_progress_bar usage.quotas.instances.used usage.quotas.instances.quota %}
 

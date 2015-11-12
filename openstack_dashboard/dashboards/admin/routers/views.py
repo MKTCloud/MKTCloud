@@ -144,4 +144,4 @@ class DetailView(tables.MultiTableView):
 class CreateView(forms.ModalFormView):
     form_class = CreateForm
     template_name = 'admin/routers/create.html'
-    success_url = reverse_lazy("horizon:project:routers:index")
+    success_url = reverse_lazy("horizon:admin:routers:index")

@@ -37,9 +37,9 @@ var widthLess1024 = function(){
 
     //move content if navigation is collapsed
     if ($('#sidebar').hasClass('collapsed')) {
-      $('#content').animate({left: "0px",paddingLeft: "55px"},150);
+      $('#content').animate({left: "0px",paddingLeft: "40px"},150);
     } else {
-      $('#content').animate({paddingLeft: "55px"},150);
+      $('#content').animate({paddingLeft: "40px"},150);
     };
   }
 
@@ -49,9 +49,9 @@ var widthLess1024 = function(){
 
     //move content if navigation is not collapsed
     if ($('#sidebar').hasClass('collapsed')) {
-      $('#content').animate({left: "210px",paddingLeft: "265px"},150);
+      $('#content').animate({left: "210px",paddingLeft: "250px"},150);
     } else {
-      $('#content').animate({paddingLeft: "265px"},150);
+      $('#content').animate({paddingLeft: "250px"},150);
     };
   }  
 
@@ -241,7 +241,7 @@ $(function(){
         }
         else {
           //if width is not less than 1024px give padding 55px to content
-          $('#content').animate({paddingLeft: "55px"},150)
+          $('#content').animate({paddingLeft: "40px"},150)
         }
 
       } else {
@@ -252,14 +252,14 @@ $(function(){
         }
         else {
           //if width is not less than 1024px give padding 265px to content
-          $('#content').animate({paddingLeft: "265px"},150)
+          $('#content').animate({paddingLeft: "250px"},150)
         }
       }
     } else {
       if ($('#sidebar').hasClass('collapsed')) {
-        $('#content').css({paddingLeft: "55px", display: 'block'})
+        $('#content').css({paddingLeft: "40px", display: 'block'})
       } else {
-        $('#content').css({paddingLeft: "265px", display: 'none'})
+        $('#content').css({paddingLeft: "250px", display: 'none'})
       }
     }
 

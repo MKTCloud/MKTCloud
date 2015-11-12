@@ -21,7 +21,7 @@ LOG = logging.getLogger(__name__)
 
 class CreateForm(forms.SelfHandlingForm):
     name = forms.CharField(max_length="255", label=_("Router Name"))
-    failure_url = 'horizon:project:routers:index'
+    failure_url = 'horizon:admin:routers:index'
 
     def __init__(self, request, *args, **kwargs):
         super(CreateForm, self).__init__(request, *args, **kwargs)

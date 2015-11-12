@@ -17,7 +17,7 @@
        <ul class="menu">
           {% for panel in panels %}
             <li>
-              <a href="{{ panel.get_absolute_url }}" {% if current == panel.slug %}class="active"{% endif %} > <i class="iconfont icon-mylibrarybooks"></i> {{ panel.name }}</a>
+              <a href="{{ panel.get_absolute_url }}" > <i class="{{ panel.stylecss }}"></i> {{ panel.name }}</a>
            </li>
          {% endfor %}
         </ul>

@@ -24,7 +24,7 @@ from openstack_dashboard.dashboards.project.images_and_snapshots \
 
 
 class AdminCreateImage(CreateImage):
-    url = "horizon:admin:images:create"
+    url = "horizon:project:images_and_snapshots:images:create"
    #  url = "create/#modalConfirm"
 
 class AdminDeleteImage(DeleteImage):
@@ -32,8 +32,9 @@ class AdminDeleteImage(DeleteImage):
         return True
 
 
+
 class AdminEditImage(EditImage):
-    url = "horizon:admin:images:update"
+    url = "horizon:project:images_and_snapshots:images:update"
 
     def allowed(self, request, image=None):
         return True
@@ -41,11 +42,11 @@ class AdminEditImage(EditImage):
 
 class AdminImagesTable(ImagesTable):
     name = tables.Column("name",
-                         link="horizon:admin:images:detail",
+                         link="detail",
                          verbose_name=_("Image Name"))
 
     class Meta:
         name = "images"
         verbose_name = _("Images")
-        table_actions = (AdminCreateImage, AdminDeleteImage)
+        table_actions = (AdminCreateImage, )
         row_actions = (AdminEditImage, AdminDeleteImage)

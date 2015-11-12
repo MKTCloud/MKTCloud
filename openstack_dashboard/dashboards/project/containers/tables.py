@@ -126,7 +126,7 @@ class ContainersTable(tables.DataTable):
     class Meta:
         name = "containers"
         verbose_name = _("Containers")
-        table_actions = (CreateContainer,)
+        table_actions = (CreateContainer,DeleteContainer)
         row_actions = (DeleteContainer,)
         browser_table = "navigation"
         footer = False

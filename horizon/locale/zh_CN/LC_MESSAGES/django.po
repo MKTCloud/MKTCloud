@@ -238,7 +238,7 @@ msgstr "当前项目"
 
 #: templates/horizon/common/_usage_summary.html:5
 msgid "Select a month to query its usage"
-msgstr "选择一个月份查询它的使用情况"
+msgstr "使用情况"
 
 #: templates/horizon/common/_usage_summary.html:9
 msgid "Submit"
@@ -246,7 +246,7 @@ msgstr "提交"
 
 #: templates/horizon/common/_usage_summary.html:14
 msgid "Active Instances"
-msgstr "活跃的云主机"
+msgstr "云主机"
 
 #: templates/horizon/common/_usage_summary.html:15
 msgid "Active RAM"
@@ -254,11 +254,11 @@ msgstr ""
 
 #: templates/horizon/common/_usage_summary.html:16
 msgid "This Month's VCPU-Hours"
-msgstr "本月的 VCPU 小时时间"
+msgstr "VCPU小时"
 
 #: templates/horizon/common/_usage_summary.html:17
 msgid "This Month's GB-Hours"
-msgstr "本月的 GB 小时时间"
+msgstr "GB小时"
 
 #: templates/horizon/common/_workflow.html:33
 msgid "Cancel"

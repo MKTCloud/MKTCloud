@@ -68,6 +68,11 @@ class CreateNetwork(tables.LinkAction):
     url = "horizon:admin:networks:create"
     classes = ("ajax-modal", "btn-create")
 
+class CreateSubNetwork(tables.LinkAction):
+    name = "createsub"
+    verbose_name = _("Create SubNetwork")
+    url = "horizon:admin:networks:create"
+    classes = ("ajax-modal", "btn-create")
 
 class EditNetwork(CheckNetworkEditable, tables.LinkAction):
     name = "update"
@@ -104,5 +109,5 @@ class NetworksTable(tables.DataTable):
     class Meta:
         name = "networks"
         verbose_name = _("Networks")
-        table_actions = (CreateNetwork, DeleteNetwork)
+        table_actions = (CreateNetwork,CreateSubnet, DeleteNetwork)
         row_actions = (EditNetwork, CreateSubnet, DeleteNetwork)
