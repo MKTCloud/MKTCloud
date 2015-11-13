@@ -30,6 +30,7 @@ from django.utils.translation import ugettext_lazy as _
 from horizon import exceptions
 from horizon import tables
 from horizon import tabs
+from .tabs import SnapshotTabs
 
 from openstack_dashboard import api
 from openstack_dashboard.api.base import is_service_enabled
@@ -41,8 +42,9 @@ from .volume_snapshots.tabs import SnapshotDetailTabs
 LOG = logging.getLogger(__name__)
 
 
-class IndexView(tables.MultiTableView):
-    table_classes = (ImagesTable, SnapshotsTable, VolumeSnapshotsTable)
+class IndexView(tabs.TabbedTableView):
+    tab_group_class = SnapshotTabs
+  #  table_classes = (ImagesTable, SnapshotsTable, VolumeSnapshotsTable)
     template_name = 'project/images_and_snapshots/index.html'
 
     def has_more_data(self, table):

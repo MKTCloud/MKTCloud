@@ -32,6 +32,8 @@ LOG = logging.getLogger(__name__)
 class DeleteRouter(tables.DeleteAction):
     data_type_singular = _("Router")
     data_type_plural = _("Routers")
+    iconfont = "iconfont icon-delete media-object"
+    card = "card card-red"
     redirect_url = "horizon:admin:routers:index"
 
     def delete(self, request, obj_id):
@@ -57,13 +59,16 @@ class DeleteRouter(tables.DeleteAction):
 class CreateRouter(tables.LinkAction):
     name = "create"
     verbose_name = _("Create Router")
+    iconfont = "iconfont icon-router media-object"
+    card = "card card-blue"
     url = "create"
     classes = ("ajax-modal", "btn-create")
 
 class CreateMore(tables.LinkAction):
     name = "more"
     verbose_name = _("Create More")
-    classes = ('card','card-slategray')
+    iconfont = "iconfont icon-more media-object"
+    card = "card card-slategray"
     attrs={"data-toggle": "modal"}
     url = "#modalConfirm"
     classes = ("ajax-modal", "btn-create")    

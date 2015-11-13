@@ -39,6 +39,8 @@ def wrap_delimiter(name):
 class DeleteContainer(tables.DeleteAction):
     data_type_singular = _("Container")
     data_type_plural = _("Containers")
+    iconfont = "iconfont icon-delete media-object"
+    card = "card card-red"
     success_url = "horizon:project:containers:index"
 
     def delete(self, request, obj_id):
@@ -60,8 +62,10 @@ class DeleteContainer(tables.DeleteAction):
 class CreateContainer(tables.LinkAction):
     name = "create"
     verbose_name = _("Create Container")
+    iconfont = "iconfont icon-folderadd media-object"
+    card = "card card-blue"
     url = "horizon:project:containers:create"
-    classes = ("ajax-modal", "btn-create")
+   # classes = ("ajax-modal", "btn-create")
 
 
 class ListObjects(tables.LinkAction):
@@ -126,7 +130,7 @@ class ContainersTable(tables.DataTable):
     class Meta:
         name = "containers"
         verbose_name = _("Containers")
-        table_actions = (CreateContainer,DeleteContainer)
+        table_actions = (CreateContainer,)
         row_actions = (DeleteContainer,)
         browser_table = "navigation"
         footer = False

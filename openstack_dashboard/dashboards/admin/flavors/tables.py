@@ -13,7 +13,9 @@ LOG = logging.getLogger(__name__)
 class DeleteFlavor(tables.DeleteAction):
     data_type_singular = _("Flavor")
     data_type_plural = _("Flavors")
-
+    verbose_name = _("Delete Alarm")
+    iconfont = "iconfont icon-delete media-object"
+    card = "card card-red"
     def delete(self, request, obj_id):
         api.nova.flavor_delete(request, obj_id)
 
@@ -21,6 +23,8 @@ class DeleteFlavor(tables.DeleteAction):
 class CreateFlavor(tables.LinkAction):
     name = "create"
     verbose_name = _("Create Flavor")
+    iconfont = "iconfont icon-cloud media-object"
+    card = "card card-blue"
     url = "horizon:admin:flavors:create"
     classes = ("ajax-modal", "btn-create")
 

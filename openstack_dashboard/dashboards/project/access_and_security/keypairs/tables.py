@@ -29,7 +29,8 @@ LOG = logging.getLogger(__name__)
 class DeleteKeyPairs(tables.DeleteAction):
     data_type_singular = _("Keypair")
     data_type_plural = _("Keypairs")
-
+    iconfont = "iconfont icon-delete media-object"
+    card = "card card-red"
     def delete(self, request, obj_id):
         api.nova.keypair_delete(request, obj_id)
 
@@ -37,6 +38,8 @@ class DeleteKeyPairs(tables.DeleteAction):
 class ImportKeyPair(tables.LinkAction):
     name = "import"
     verbose_name = _("Import Keypair")
+    iconfont = "iconfont icon-key media-object"
+    card = "card card-green"
     url = "horizon:project:access_and_security:keypairs:import"
     classes = ("ajax-modal", "btn-upload")
 
@@ -44,6 +47,8 @@ class ImportKeyPair(tables.LinkAction):
 class CreateKeyPair(tables.LinkAction):
     name = "create"
     verbose_name = _("Create Keypair")
+    iconfont = "iconfont icon-key media-object"
+    card = "card card-blue"
     url = "horizon:project:access_and_security:keypairs:create"
     classes = ("ajax-modal", "btn-create")
 

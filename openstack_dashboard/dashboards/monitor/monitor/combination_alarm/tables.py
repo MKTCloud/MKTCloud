@@ -10,6 +10,8 @@ from openstack_dashboard import api
 class CreateCombinationAlarm(tables.LinkAction):
     name = "create"
     verbose_name = _("Create CombinationAlarm")
+    card = "card card-blue"
+    iconfont = "iconfont icon-drive media-object"
     attrs={"data-toggle": "modal"}
     url = "#modalConfirm"
     classes = ("ajax-modal", "btn-create")
@@ -17,6 +19,8 @@ class CreateCombinationAlarm(tables.LinkAction):
 class DeleteCombinationAlarm(tables.LinkAction):
     name = "delete"
     verbose_name = _("Delete CombinationAlarm")
+    iconfont = "iconfont icon-delete media-object"
+    card = "card card-red"
     attrs={"data-toggle": "modal"}
     url = "#modalConfirm"
     classes = ("ajax-modal", "btn-create")

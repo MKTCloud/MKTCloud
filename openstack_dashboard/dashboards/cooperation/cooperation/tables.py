@@ -7,6 +7,8 @@ LOG = logging.getLogger(__name__)
 class CreateInvite(tables.LinkAction):
     name = "invite"
     verbose_name = _("Create Invite")
+    iconfont = "iconfont icon-useradd media-object"
+    card = "card card-blue"
     attrs={"data-toggle": "modal"}
     url = "#modalConfirm"
     classes = ("ajax-modal", "btn-create")
@@ -14,6 +16,8 @@ class CreateInvite(tables.LinkAction):
 class InviteAgain(tables.LinkAction):
     name = "again"
     verbose_name = _("Invite Again")
+    iconfont = "iconfont icon-refresh media-object"
+    card = "card card-drank"
     attrs={"data-toggle": "modal"}
     url = "#modalConfirm"
     classes = ("ajax-modal", "btn-create")    
@@ -21,6 +25,8 @@ class InviteAgain(tables.LinkAction):
 class EditPermission(tables.LinkAction):
     name = "permission"
     verbose_name = _("Edit Permission")
+    iconfont = "iconfont icon-site media-object"
+    card = "card card-green"
     attrs={"data-toggle": "modal"}
     url = "#modalConfirm"
     classes = ("ajax-modal", "btn-create")
@@ -28,6 +34,8 @@ class EditPermission(tables.LinkAction):
 class CancelInvite(tables.LinkAction):
     name = "more"
     verbose_name = _("Cancel Invite")
+    iconfont = "iconfont icon-delete media-object"
+    card = "card card-red"
     attrs={"data-toggle": "modal"}
     url = "#modalConfirm"
     classes = ("ajax-modal", "btn-create")    

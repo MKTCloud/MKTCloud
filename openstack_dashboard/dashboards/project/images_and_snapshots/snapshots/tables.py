@@ -27,6 +27,25 @@ from ..images.tables import ImagesTable, EditImage, DeleteImage, UpdateRow
 
 LOG = logging.getLogger(__name__)
 
+class CreateSnapshot(tables.LinkAction):
+    name = "create"
+    verbose_name = _("Create Snapshot")
+    attrs={"data-toggle": "modal"}
+    iconfont = "iconfont icon-cameraalt media-object"
+    card = "card card-blue"
+    url = "#modalConfirm"
+    classes = ("ajax-modal", "btn-create")
+    
+class DeleteHost(tables.LinkAction):
+    name = "del"
+    verbose_name = _("Delete Alarm")
+    iconfont = "iconfont icon-delete media-object"
+    card = "card card-red"
+    attrs={"data-toggle": "modal"}
+    url = "#modalConfirm"
+    classes = ("ajax-modal", "btn-create")
+
+
 
 class LaunchSnapshot(tables.LinkAction):
     name = "launch_snapshot"
@@ -53,7 +72,7 @@ class SnapshotsTable(ImagesTable):
     class Meta(ImagesTable.Meta):
         name = "snapshots"
         verbose_name = _("Instance Snapshots")
-        table_actions = (DeleteSnapshot,)
+        table_actions = (CreateSnapshot,DeleteHost,)
         row_actions = (LaunchSnapshot, EditImage, DeleteSnapshot)
         pagination_param = "snapshot_marker"
         row_class = UpdateRow

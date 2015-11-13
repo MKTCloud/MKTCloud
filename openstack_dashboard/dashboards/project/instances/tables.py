@@ -72,6 +72,8 @@ class TerminateInstance(tables.BatchAction):
     action_past = _("Scheduled termination of")
     data_type_singular = _("Instance")
     data_type_plural = _("Instances")
+    iconfont = "iconfont icon-delete media-object"
+    card = "card card-red"
     classes = ('btn-danger', 'btn-terminate')
 
     def allowed(self, request, instance=None):
@@ -169,6 +171,8 @@ class LaunchLink(tables.LinkAction):
     name = "launch"
     verbose_name = _("Launch Instance")
     url = "horizon:project:instances:launch"
+    iconfont = "iconfont icon-play media-object"
+    card = "card card-green"
     classes = ("btn-launch", "ajax-modal")
 
     def allowed(self, request, datum):
@@ -234,6 +238,8 @@ class CreateSnapshot(tables.LinkAction):
     name = "snapshot"
     verbose_name = _("Create Snapshot")
     url = "horizon:project:images_and_snapshots:snapshots:create"
+    iconfont = "iconfont icon-cloud media-object"
+    card = "card card-red"
     classes = ("ajax-modal", "btn-camera")
 
     def allowed(self, request, instance=None):
@@ -373,6 +379,8 @@ class SimpleDisassociateIP(tables.Action):
 class CreateHost(tables.LinkAction):
     name = "host"
     verbose_name = _("Create Host")
+    iconfont = "iconfont icon-cloud media-object"
+    card = "card card-blue"
     attrs={"data-toggle": "modal"}
     url = "#modalConfirm"
     classes = ("ajax-modal", "btn-create")
@@ -380,6 +388,8 @@ class CreateHost(tables.LinkAction):
 class CreateMore(tables.LinkAction):
     name = "more"
     verbose_name = _("Create More")
+    iconfont = "iconfont icon-more media-object"
+    card = "card card-slategray"
     attrs={"data-toggle": "modal"}
     url = "#modalConfirm"
     classes = ("ajax-modal", "btn-create")    

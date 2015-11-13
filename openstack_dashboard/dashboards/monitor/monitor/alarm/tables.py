@@ -11,12 +11,16 @@ class CreateAlarm(tables.LinkAction):
     name = "create"
     verbose_name = _("Create Alarm")
     attrs={"data-toggle": "modal"}
+    card = "card card-blue"
+    iconfont = "iconfont icon-drive media-object"
     url = "#modalConfirm"
     classes = ("ajax-modal", "btn-create")
     
 class DeleteAlarm(tables.LinkAction):
     name = "delete"
     verbose_name = _("Delete Alarm")
+    iconfont = "iconfont icon-delete media-object"
+    card = "card card-red"
     attrs={"data-toggle": "modal"}
     url = "#modalConfirm"
     classes = ("ajax-modal", "btn-create")

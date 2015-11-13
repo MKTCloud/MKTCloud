@@ -65,12 +65,16 @@ class DeleteNetwork(CheckNetworkEditable, tables.DeleteAction):
 class CreateNetwork(tables.LinkAction):
     name = "create"
     verbose_name = _("Create Network")
+    iconfont = "iconfont icon-network media-object"
+    card = "card card-blue"
     url = "horizon:admin:networks:create"
     classes = ("ajax-modal", "btn-create")
 
 class CreateSubNetwork(tables.LinkAction):
     name = "createsub"
     verbose_name = _("Create SubNetwork")
+    iconfont = "iconfont icon-tree media-object"
+    card = "card card-green"
     url = "horizon:admin:networks:create"
     classes = ("ajax-modal", "btn-create")
 
@@ -84,7 +88,9 @@ class EditNetwork(CheckNetworkEditable, tables.LinkAction):
 class CreateSubnet(CheckNetworkEditable, tables.LinkAction):
     name = "subnet"
     verbose_name = _("Add Subnet")
-    url = "horizon:project:networks:addsubnet"
+    iconfont = "iconfont icon-tree media-object"
+    card = "card card-green"
+    url = "addsubnet"
     classes = ("ajax-modal", "btn-create")
 
 

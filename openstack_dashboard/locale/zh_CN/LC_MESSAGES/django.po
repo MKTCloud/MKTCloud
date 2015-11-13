@@ -112,27 +112,90 @@ msgstr "监控报警"
 msgid "Monitor Indicators"
 msgstr "监控指标"
 
+#: dashboards/monitor/monitor/monitor_indicators/tables.py:12
+msgid "Create Alarm"
+msgstr "创建报警"
+
+#: dashboards/monitor/monitor/monitor_indicators/tables.py:19
+msgid "Filter Alarm"
+msgstr "过滤"
+
 #: dashboards/monitor/monitor/tabs.py:27
 msgid "Alarm"
 msgstr "报警"
+
+#: dashboards/monitor/monitor/alarm/tables.py:19
+msgid "Delete Alarm"
+msgstr "删除"
 
 #: dashboards/monitor/monitor/tabs.py:36
 msgid "Combination Alarm"
 msgstr "组合报警"
 
+#: dashboards/monitor/monitor/combination_alarm/tables.py:12
+msgid "Create CombinationAlarm"
+msgstr "创建组合报警"
+
+#: dashboards/monitor/monitor/combination_alarm/tables.py:19
+msgid "Delete CombinationAlarm"
+msgstr "删除"
+
 #: dashboards/monitor/notice/panel.py:9
 msgid "Notice"
 msgstr "通知列表"
+
+#: dashboards/monitor/notice/tables.py:9
+msgid "Create Notice"
+msgstr "创建通知列表"
+
+#: dashboards/monitor/notice/tables.py:16
+msgid "Update Notice"
+msgstr "修改通知列表"
+
+#: dashboards/monitor/notice/tables.py:23
+msgid "Delete Notice"
+msgstr "删除"
 
 #: dashboards/cooperation/dashboard.py:24
 msgid "Cooperation"
 msgstr "用户协作"
 
+#: dashboards/cooperation/cooperation/tables.py:9
+msgid "Create Invite"
+msgstr "邀请用户"
+
+#: dashboards/cooperation/cooperation/tables.py:16
+msgid "Invite Again"
+msgstr "重新邀请"
+
+#: dashboards/cooperation/cooperation/tables.py:23
+msgid "Edit Permission"
+msgstr "修改权限"
+
+#: dashboards/cooperation/cooperation/tables.py:30
+msgid "Cancel Invite"
+msgstr "移出用户"
+
+
 #: dashboards/support/dashboard.py:24
 msgid "Support"
 msgstr "服务支持"
 
+#: dashboards/support/support/tables.py:9
+msgid "Pending Accept"
+msgstr "等待受理"
 
+#: dashboards/support/support/tables.py:16
+msgid "Accepting"
+msgstr "受理中"
+
+#: dashboards/support/support/tables.py:23
+msgid "Resolved"
+msgstr "已解决"
+
+#: dashboards/support/support/tables.py:30
+msgid "Closed"
+msgstr "已关闭"
 
 #: dashboards/admin/flavors/forms.py:36 dashboards/admin/info/tables.py:67
 #: dashboards/admin/instances/tables.py:91
@@ -623,6 +686,16 @@ msgstr "ID"
 #: dashboards/project/access_and_security/api_access/tables.py:54
 msgid "Service"
 msgstr "服务"
+
+#: dashboards/project/access_and_security/api_access/tables.py:48
+#: dashboards/project/access_and_security/api_access/tables.py:49
+msgid "Download OpenStack RC File"
+msgstr "下载RC文件"
+
+#: dashboards/project/access_and_security/api_access/tables.py:38
+#: dashboards/project/access_and_security/api_access/tables.py:39
+msgid "Download EC2 Credentials"
+msgstr "下载EC2认证"
 
 #: dashboards/admin/info/tables.py:69 dashboards/admin/instances/tables.py:87
 #: dashboards/admin/volumes/tables.py:28
@@ -1288,16 +1361,20 @@ msgstr "注入文件"
 
 #: dashboards/admin/projects/workflows.py:50
 #: dashboards/admin/volumes/panel.py:9 dashboards/admin/volumes/tables.py:33
+#: dashboards/project/volumes/tables.py:39
 #: dashboards/admin/volumes/templates/volumes/index.html:3
 #: dashboards/admin/volumes/templates/volumes/index.html:6
 #: dashboards/project/volumes/panel.py:25
-#: dashboards/project/volumes/tables.py:39
 #: dashboards/project/volumes/tables.py:182
 #: dashboards/project/volumes/tables.py:194
 #: dashboards/project/volumes/templates/volumes/index.html:3
 #: dashboards/project/volumes/templates/volumes/index.html:6
 msgid "Volumes"
 msgstr "云硬盘"
+
+#: dashboards/project/volumes/tables.py:38
+msgid "Delete Volumes"
+msgstr "删除"
 
 #: dashboards/admin/projects/workflows.py:51
 msgid "Gigabytes"
@@ -1877,15 +1954,7 @@ msgstr "无法检索动态IP池"
 msgid "API Access"
 msgstr "使用API"
 
-#: dashboards/project/access_and_security/api_access/tables.py:38
-#: dashboards/project/access_and_security/api_access/tables.py:39
-msgid "Download EC2 Credentials"
-msgstr "下载EC2凭证"
 
-#: dashboards/project/access_and_security/api_access/tables.py:46
-#: dashboards/project/access_and_security/api_access/tables.py:47
-msgid "Download OpenStack RC File"
-msgstr "下载 OpenStack RC文件"
 
 #: dashboards/project/access_and_security/api_access/tables.py:57
 msgid "Service Endpoint"
@@ -2242,6 +2311,10 @@ msgstr "不能添加规则到安全组"
 #: dashboards/project/access_and_security/templates/access_and_security/security_groups/create.html:6
 msgid "Create Security Group"
 msgstr "新建安全组"
+
+#: dashboards/project/access_and_security/security_groups/tables.py:34
+msgid "Delete Security Group"
+msgstr "删除"
 
 #: dashboards/project/access_and_security/security_groups/tables.py:52
 msgid "Edit Rules"
@@ -2948,6 +3021,14 @@ msgstr "编辑实例"
 #: dashboards/project/instances/tables.py:222
 msgid "Edit Security Groups"
 msgstr "编辑安全组"
+
+#: dashboards/project/instances/tables.py:375
+msgid "Create Host"
+msgstr "云主机"
+
+#: dashboards/project/instances/tables.py:382
+msgid "Create More"
+msgstr "更多"
 
 #: dashboards/project/instances/tables.py:245
 #: dashboards/project/instances/tabs.py:55

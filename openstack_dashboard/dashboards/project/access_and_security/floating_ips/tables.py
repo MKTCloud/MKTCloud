@@ -39,7 +39,8 @@ class AllocateIP(tables.LinkAction):
     verbose_name = _("Allocate IP To Project")
     classes = ("ajax-modal", "btn-allocate")
     url = "horizon:project:access_and_security:floating_ips:allocate"
-
+    iconfont = "iconfont icon-ip media-object"
+    card = "card card-blue"
     def single(self, data_table, request, *args):
         return shortcuts.redirect('horizon:project:access_and_security:index')
 

@@ -25,6 +25,8 @@ from openstack_dashboard.dashboards.project.images_and_snapshots \
 
 class AdminCreateImage(CreateImage):
     url = "horizon:project:images_and_snapshots:images:create"
+    iconfont = "iconfont icon-viewcarousel media-object"
+    card = "card card-blue"
    #  url = "create/#modalConfirm"
 
 class AdminDeleteImage(DeleteImage):

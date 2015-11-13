@@ -33,11 +33,13 @@ LOG = logging.getLogger(__name__)
 
 DELETABLE_STATES = ("available", "error")
 
-
 class DeleteVolume(tables.DeleteAction):
     data_type_singular = _("Volume")
+    verbose_name = _("Delete Volume")
     data_type_plural = _("Volumes")
     action_past = _("Scheduled deletion of")
+    iconfont = "iconfont icon-delete media-object"
+    card = "card card-red"
 
     def delete(self, request, obj_id):
         obj = self.table.get_object_by_id(obj_id)
@@ -60,18 +62,24 @@ class CreateVolume(tables.LinkAction):
     name = "create"
     verbose_name = _("Create Volume")
     url = "horizon:project:volumes:create"
+    iconfont = "iconfont icon-drive media-object"
+    card = "card card-blue"
     classes = ("ajax-modal", "btn-create")
 
 class CreateHost(tables.LinkAction):
     name = "host"
     verbose_name = _("Create Host")
     attrs={"data-toggle": "modal"}
+    iconfont = "iconfont icon-cloudhosting media-object"
+    card = "card card-green"
     url = "#modalConfirm"
     classes = ("ajax-modal", "btn-create")
     
 class CreateMore(tables.LinkAction):
     name = "more"
     verbose_name = _("Create More")
+    iconfont = "iconfont icon-more media-object"
+    card = "card card-slategray"
     attrs={"data-toggle": "modal"}
     url = "#modalConfirm"
     classes = ("ajax-modal", "btn-create")    
@@ -195,7 +203,7 @@ class VolumesTable(VolumesTableBase):
         verbose_name = _("Volumes")
         status_columns = ["status"]
         row_class = UpdateRow
-        table_actions = (CreateVolume, DeleteVolume,CreateHost,CreateMore)
+        table_actions = (CreateVolume,CreateHost,CreateMore)
         row_actions = (EditAttachments, CreateSnapshot, DeleteVolume)
 
 

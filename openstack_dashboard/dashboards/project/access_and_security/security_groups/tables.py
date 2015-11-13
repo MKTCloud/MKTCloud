@@ -30,8 +30,10 @@ LOG = logging.getLogger(__name__)
 
 class DeleteGroup(tables.DeleteAction):
     data_type_singular = _("Security Group")
-    data_type_plural = _("Security Groups")
-
+    data_type_plural = _("Security Group")
+    verbose_name = _("Delete Security Group")
+    iconfont = "iconfont icon-delete media-object"
+    card = "card card-red"
     def allowed(self, request, security_group=None):
         if not security_group:
             return True
@@ -44,6 +46,8 @@ class DeleteGroup(tables.DeleteAction):
 class CreateGroup(tables.LinkAction):
     name = "create"
     verbose_name = _("Create Security Group")
+    iconfont = "iconfont icon-locked media-object"
+    card = "card card-blue"
     url = "horizon:project:access_and_security:security_groups:create"
     classes = ("ajax-modal", "btn-create")
 

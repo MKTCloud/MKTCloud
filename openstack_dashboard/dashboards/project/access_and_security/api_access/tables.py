@@ -38,6 +38,8 @@ class DownloadEC2(tables.LinkAction):
     verbose_name = _("Download EC2 Credentials")
     verbose_name_plural = _("Download EC2 Credentials")
     classes = ("btn-download",)
+    iconfont = "fa fa-shopping-cart media-object"
+    card = "card card-blue"
     url = "horizon:project:access_and_security:api_access:ec2"
 
 
@@ -46,6 +48,8 @@ class DownloadOpenRC(tables.LinkAction):
     verbose_name = _("Download OpenStack RC File")
     verbose_name_plural = _("Download OpenStack RC File")
     classes = ("btn-download",)
+    iconfont = "fa fa-shopping-cart media-object"
+    card = "card card-blue"
     url = "horizon:project:access_and_security:api_access:openrc"
 
 

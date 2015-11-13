@@ -20,7 +20,8 @@ class CreateUserLink(tables.LinkAction):
     verbose_name = _("Create User")
     url = "horizon:admin:users:create"
     classes = ("ajax-modal", "btn-create")
-
+    iconfont = "iconfont icon-useradd media-object"
+    card = "card card-blue"
     def allowed(self, request, user):
         return api.keystone.keystone_can_edit_user()
 
@@ -78,7 +79,8 @@ class ToggleEnabled(tables.BatchAction):
 class DeleteUsersAction(tables.DeleteAction):
     data_type_singular = _("User")
     data_type_plural = _("Users")
-
+    iconfont = "iconfont icon-delete media-object"
+    card = "card card-red"
     def allowed(self, request, datum):
         if not api.keystone.keystone_can_edit_user() or \
                 (datum and datum.id == request.user.id):

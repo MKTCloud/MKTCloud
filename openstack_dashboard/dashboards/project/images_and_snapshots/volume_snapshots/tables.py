@@ -30,11 +30,34 @@ from ...volumes import tables as volume_tables
 
 LOG = logging.getLogger(__name__)
 
+class CreateVolume(tables.LinkAction):
+    name = "create"
+    verbose_name = _("Create Volume")
+    iconfont = "iconfont icon-drive media-object"
+    card = "card card-blue"
+    attrs={"data-toggle": "modal"}
+    url = "#modalConfirm"
+    classes = ("ajax-modal", "btn-create")
+    
+class DeleteVolume(tables.LinkAction):
+    name = "del"
+    verbose_name = _("Delete Alarm")
+    iconfont = "iconfont icon-delete media-object"
+    card = "card card-red"
+    attrs={"data-toggle": "modal"}
+    url = "#modalConfirm"
+    classes = ("ajax-modal", "btn-create")
+
 
 class DeleteVolumeSnapshot(tables.DeleteAction):
+    name = "delete"
     data_type_singular = _("Volume Snapshot")
     data_type_plural = _("Volume Snapshots")
     action_past = _("Scheduled deletion of")
+    verbose_name = _("Delete Alarm")
+    attrs={"data-toggle": "modal"}
+    url = "#modalConfirm"
+    classes = ("ajax-modal", "btn-create")
 
     def delete(self, request, obj_id):
         api.cinder.volume_snapshot_delete(request, obj_id)
@@ -87,7 +110,7 @@ class VolumeSnapshotsTable(volume_tables.VolumesTableBase):
     class Meta:
         name = "volume_snapshots"
         verbose_name = _("Volume Snapshots")
-        table_actions = (DeleteVolumeSnapshot,)
+        table_actions = (CreateVolume,DeleteVolume)
         row_actions = (CreateVolumeFromSnapshot, DeleteVolumeSnapshot)
         row_class = UpdateRow
         status_columns = ("status",)

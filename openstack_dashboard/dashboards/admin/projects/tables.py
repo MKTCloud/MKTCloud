@@ -38,8 +38,8 @@ class CreateProject(tables.LinkAction):
     name = "create"
     verbose_name = _("Create Project")
     url = "horizon:admin:projects:create"
-    classes = ("btn-launch", "ajax-modal",)
-
+    iconfont = "iconfont icon-cloud media-object"
+    card = "card card-blue"
     def allowed(self, request, project):
         return api.keystone.keystone_can_edit_project()
 
@@ -70,7 +70,9 @@ class ModifyQuotas(tables.LinkAction):
 class DeleteTenantsAction(tables.DeleteAction):
     data_type_singular = _("Project")
     data_type_plural = _("Projects")
-
+    verbose_name = _("Delete Alarm")
+    iconfont = "iconfont icon-delete media-object"
+    card = "card card-red"
     def allowed(self, request, project):
         return api.keystone.keystone_can_edit_project()
 

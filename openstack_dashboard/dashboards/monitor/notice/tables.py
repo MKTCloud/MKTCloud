@@ -7,6 +7,8 @@ LOG = logging.getLogger(__name__)
 class CreateNotice(tables.LinkAction):
     name = "create"
     verbose_name = _("Create Notice")
+    iconfont = "iconfont icon-eventnote media-object"
+    card = "card card-blue"
     attrs={"data-toggle": "modal"}
     url = "#modalConfirm"
     classes = ("ajax-modal", "btn-create")
@@ -14,6 +16,8 @@ class CreateNotice(tables.LinkAction):
 class UpdateNotice(tables.LinkAction):
     name = "update"
     verbose_name = _("Update Notice")
+    iconfont = "iconfont icon-site media-object"
+    card = "card card-green"
     attrs={"data-toggle": "modal"}
     url = "#modalConfirm"
     classes = ("ajax-modal", "btn-create")
@@ -21,6 +25,8 @@ class UpdateNotice(tables.LinkAction):
 class DeleteNotice(tables.LinkAction):
     name = "delete"
     verbose_name = _("Delete Notice")
+    iconfont = "iconfont icon-delete media-object"
+    card = "card card-red"
     attrs={"data-toggle": "modal"}
     url = "#modalConfirm"
     classes = ("ajax-modal", "btn-create")
