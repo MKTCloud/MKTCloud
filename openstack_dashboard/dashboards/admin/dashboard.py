@@ -22,7 +22,7 @@ import horizon
 class SystemPanels(horizon.PanelGroup):
     slug = "admin"
     name = _("System Panel")
-    panels = ('networks','network_topology', 'instances', 'loadbalancers', 'flavors',
+    panels = ('networks','network_topology', 'loadbalancers', 'flavors',
                'projects', 'users','routers', 'info')
 
 

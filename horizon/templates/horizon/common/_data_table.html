@@ -1,20 +1,32 @@
 {% load i18n %}
 {% with table.needs_form_wrapper as needs_form_wrapper %}
-<div class="table_wrapper">
+
   {% if needs_form_wrapper %}<form action="{{ table.get_absolute_url }}" method="POST">{% csrf_token %}{% endif %}
   {% with columns=table.get_columns rows=table.get_rows %}
 {% block table %}
-  <table id="{{ table.name }}" class="table table-bordered table-striped datatable">
-    <thead>
+
+  <table id="{{ table.name }}" >
+
   {% block table_caption %}
       {{ table.render_table_actions }}
-      <tr class='table_caption'>
-        <th class='table_header' colspan='{{ columns|length }}'>
-          <h3 class='table_title'>{{ table }}</h3>
-      
-        </th>
-      </tr>
+
   {% endblock table_caption %}
+     	<section class="tile color transparent transparent-black">  
+      <div class='tile-header color blue rounded-top-corners'>
+          <h1>
+          	<strong>
+             {{ table }}
+          	</strong>
+          </h1>
+        <div class='search'>
+        	<input type="text" placeholder="Search...">
+        </div>
+        <div class="controls">
+						<a href="#" class="minimize"><i class="fa fa-chevron-down"></i></a>
+						<a href="#" class="refresh"><i class="fa fa-refresh"></i></a>
+						<a href="#" class="remove"><i class="fa fa-times"></i></a>
+				</div>
+      </div>
   {% block table_breadcrumb %}
       {% if table.breadcrumb %}
         <tr>
@@ -25,6 +37,8 @@
       {% endif %}
   {% endblock table_breadcrumb %}
   {% block table_columns %}
+  <table class="table table-custom table-sortable nomargin">
+   <thead>
       {% if not table.is_browser_table %}
       <tr>
         {% for column in columns %}
@@ -32,8 +46,8 @@
         {% endfor %}
       </tr>
       {% endif %}
+    </thead>  
   {% endblock table_columns %}
-    </thead>
   {% block table_body %}
     <tbody>
     {% for row in rows %}
@@ -45,6 +59,7 @@
     {% endfor %}
     </tbody>
   {% endblock table_body %}
+  </table>
   {% block table_footer %}
     {% if table.footer %}
     <tfoot>
@@ -59,21 +74,30 @@
         {% endfor %}
       </tr>
       {% endif %}
-      <tr>
-        <td colspan="{{ table.get_columns|length }}">
+      <div class='tile-footer text-center'>
+      <ul class="pagination pagination-sm nomargin pagination-custom">
+											<li class="disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
+											<li class="active"><a href="#">1</a></li>
+											<li><a href="#">2</a></li>
+											<li><a href="#">3</a></li>
+											<li><a href="#">4</a></li>
+											<li><a href="#">5</a></li>
+											<li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+										</ul>
           <span class="table_count">{% blocktrans count counter=rows|length %}Displaying {{ counter }} item{% plural %}Displaying {{ counter }} items{% endblocktrans %}</span>
           {% if table.has_more_data %}
           <span class="spacer">|</span>
           <a href="?{{ table.get_pagination_string }}">More&nbsp;&raquo;</a>
           {% endif %}
-        </td>
-      </tr>
     </tfoot>
+   
     {% endif %}
   {% endblock table_footer %}
-  </table>
+  </section>
+   </table>
 {% endblock table %}
   {% endwith %}
   {% if needs_form_wrapper %}</form>{% endif %}
 </div>
+
 {% endwith %}
