@@ -36,14 +36,20 @@ class CreateSnapshot(tables.LinkAction):
     url = "#modalConfirm"
     classes = ("ajax-modal", "btn-create")
     
-class DeleteHost(tables.LinkAction):
+class DeleteHost(tables.DeleteAction):
     name = "del"
+    data_type_singular = _("Snapshot")
     verbose_name = _("Delete Alarm")
     iconfont = "iconfont icon-delete media-object"
     card = "card card-red"
     attrs={"data-toggle": "modal"}
-    url = "#modalConfirm"
     classes = ("ajax-modal", "btn-create")
+    def allowed(self, request, project):
+        return ""
+
+    def delete(self, request, obj_id):
+        return ""
+
 
 
 
@@ -66,6 +72,10 @@ class LaunchSnapshot(tables.LinkAction):
 class DeleteSnapshot(DeleteImage):
     data_type_singular = _("Snapshot")
     data_type_plural = _("Snapshots")
+    verbose_name = _("Delete Alarm")
+    iconfont = "iconfont icon-delete media-object"
+    card = "card card-red"
+    attrs={"data-toggle": "modal"}
 
 
 class SnapshotsTable(ImagesTable):

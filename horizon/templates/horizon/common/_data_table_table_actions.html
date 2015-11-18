@@ -2,7 +2,7 @@
 	{% if filter.filter_type == 'fixed' %}
 		<div class="table_filter btn-group" data-toggle="buttons-radio">
 			{% for button in filter.fixed_buttons %}
-			<button name="{{ filter.get_param_name }}" type="submit" value="{{ button.value }}" class="btn btn-small{% ifequal button.value filter.filter_string %} active{% endifequal %}">{% if button.icon %}<i class="{{ button.icon }}"></i> {% endif %}{{ button.text }}{% if button.count >= 0 %} ({{ button.count }}){% endif %}</button>
+			<button name="{{ filter.get_param_name }}" type="submit" value="{{ button.value }}" class="{% ifequal button.value filter.filter_string %} active{% endifequal %}">{% if button.icon %}<i class="{{ button.icon }}"></i> {% endif %}{{ button.text }}{% if button.count >= 0 %} ({{ button.count }}){% endif %}</button>
 			{% endfor %}
 		</div>
 	{% elif filter.filter_type == 'query' %}
@@ -15,18 +15,20 @@
 			{% if action != filter %} 
 				{% if action.method != "GET" %}
 				<div class="card-container col-lg-2 col-md-4 col-sm-6 col-xs-12">
-					<div class="{{ action.card }}">
-						<button {{ action.attr_string|safe }} name="action" value="{{ action.get_param_name }}" type="submit">
-							<div class="button">
-								<span class="pull-left"><i class="{{action.iconfont}}">{{ action.iconfontContent }}</i></span><h2>{% if action.handles_multiple %}{{ action.verbose_name_plural }}{% else %}{{ action.verbose_name }}{% endif %}</h2>
-							</div>
-						</button>
+					<div class="{{ action.card }}">		
+						<a href="javascript:void(0);" onclick="button_submit()">
+						<div class="button">								
+								<span class="pull-left"><i class="{{action.iconfont}}">{{ action.iconfontContent }}</i></span><h2>{% if action.handles_multiple %}删除{% else %} {{ action.verbose_name }}{% endif %}</h2>													
+						</div>
+						</a>
+						<button hidden="hidden" class="submit" {{ action.attr_string|safe }} name="action"    value="{{ action.get_param_name }}" type="submit">	
+					</button>
 					</div>
 				</div>
 				{% else %}
 				<div class="card-container col-lg-2 col-md-4 col-sm-6 col-xs-12">
 					<div class="{{ action.card }}">
-						<a href='{{ action.get_link_url }}' title='{{ action.verbose_name }}'>
+						<a href='{{ action.get_link_url }}' title='{{ action.verbose_name }}' {{ action.attr_string|safe }}>
 							<div class="button">
 								<span class="pull-left"><i class="{{action.iconfont}}">{{ action.iconfontContent }}</i></span><h2> {{ action.verbose_name }}</h2>
 							</div>
@@ -37,3 +39,8 @@
 		{% endif %} 
 	{% endfor %}
 </div>
+<script>
+ function button_submit(){
+	 document.querySelector("button.submit").click();			
+	}
+</script>

@@ -36,7 +36,7 @@ LOG = logging.getLogger(__name__)
 
 class CreateView(workflows.WorkflowView):
     workflow_class = CreateSubnet
-    template_name = 'project/networks/subnets/create.html'
+    template_name = 'admin/networks/subnets/create.html'
 
     def get_object(self):
         if not hasattr(self, "_object"):

@@ -10,7 +10,8 @@ class CSVSummary(tables.LinkAction):
     name = "csv_summary"
     verbose_name = _("Download CSV Summary")
     classes = ("btn-download",)
-
+    iconfont = "iconfont icon-folderadd media-object"
+    card = "card card-blue"
     def get_link_url(self, usage=None):
         return self.table.kwargs['usage'].csv_link()
 
@@ -67,5 +68,5 @@ class TenantUsageTable(BaseUsageTable):
         name = "tenant_usage"
         verbose_name = _("Usage Summary")
         columns = ("instance", "vcpus", "disk", "memory", "uptime")
-        table_actions = (CSVSummary,)
+        table_actions = ()
         multi_select = False

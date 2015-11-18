@@ -55,7 +55,7 @@ class JSONView(View):
         data['servers'] = [{'name': server.name,
                             'status': server.status,
                             'id': server.id} for server in servers]
-        self.add_resource_url('horizon:project:instances:detail',
+        self.add_resource_url('horizon:admin:instances:detail',
                               data['servers'])
         # Get quantum data
         quantumclient = api.quantum.quantumclient(request)

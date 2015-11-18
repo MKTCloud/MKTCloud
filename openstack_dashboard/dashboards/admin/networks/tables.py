@@ -81,7 +81,7 @@ class CreateSubNetwork(tables.LinkAction):
 class EditNetwork(CheckNetworkEditable, tables.LinkAction):
     name = "update"
     verbose_name = _("Edit Network")
-    url = "horizon:project:networks:update"
+    url = "horizon:admin:networks:update"
     classes = ("ajax-modal", "btn-edit")
 
 
@@ -90,12 +90,12 @@ class CreateSubnet(CheckNetworkEditable, tables.LinkAction):
     verbose_name = _("Add Subnet")
     iconfont = "iconfont icon-tree media-object"
     card = "card card-green"
-    url = "addsubnet"
+    url = "horizon:admin:networks:addsubnet"
     classes = ("ajax-modal", "btn-create")
 
 
 def get_subnets(network):
-    template_name = 'project/networks/_network_ips.html'
+    template_name = 'admin/networks/_network_ips.html'
     context = {"subnets": network.subnets}
     return template.loader.render_to_string(template_name, context)
 
@@ -103,7 +103,7 @@ def get_subnets(network):
 class NetworksTable(tables.DataTable):
     name = tables.Column("name",
                          verbose_name=_("Name"),
-                         link='horizon:project:networks:detail')
+                         link='horizon:admin:networks:detail')
     subnets = tables.Column(get_subnets,
                             verbose_name=_("Subnets Associated"),)
     shared = tables.Column("shared", verbose_name=_("Shared"),
@@ -115,5 +115,5 @@ class NetworksTable(tables.DataTable):
     class Meta:
         name = "networks"
         verbose_name = _("Networks")
-        table_actions = (CreateNetwork,CreateSubnet, DeleteNetwork)
+        table_actions = (CreateNetwork,CreateSubnet)
         row_actions = (EditNetwork, CreateSubnet, DeleteNetwork)

@@ -40,6 +40,7 @@ class CreateProject(tables.LinkAction):
     url = "horizon:admin:projects:create"
     iconfont = "iconfont icon-cloud media-object"
     card = "card card-blue"
+    classes = ("ajax-modal", "btn-create")
     def allowed(self, request, project):
         return api.keystone.keystone_can_edit_project()
 

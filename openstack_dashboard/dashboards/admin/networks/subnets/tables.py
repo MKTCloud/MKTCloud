@@ -51,7 +51,7 @@ class DeleteSubnet(CheckNetworkEditable, tables.DeleteAction):
             msg = _('Failed to delete subnet %s') % obj_id
             LOG.info(msg)
             network_id = self.table.kwargs['network_id']
-            redirect = reverse('horizon:project:networks:detail',
+            redirect = reverse('horizon:admin:networks:detail',
                                args=[network_id])
             exceptions.handle(request, msg, redirect=redirect)
 
@@ -59,7 +59,7 @@ class DeleteSubnet(CheckNetworkEditable, tables.DeleteAction):
 class CreateSubnet(CheckNetworkEditable, tables.LinkAction):
     name = "create"
     verbose_name = _("Create Subnet")
-    url = "horizon:project:networks:addsubnet"
+    url = "horizon:admin:networks:addsubnet"
     classes = ("ajax-modal", "btn-create")
 
     def get_link_url(self, datum=None):
@@ -70,7 +70,7 @@ class CreateSubnet(CheckNetworkEditable, tables.LinkAction):
 class UpdateSubnet(CheckNetworkEditable, tables.LinkAction):
     name = "update"
     verbose_name = _("Edit Subnet")
-    url = "horizon:project:networks:editsubnet"
+    url = "horizon:admin:networks:editsubnet"
     classes = ("ajax-modal", "btn-edit")
 
     def get_link_url(self, subnet):
@@ -80,11 +80,11 @@ class UpdateSubnet(CheckNetworkEditable, tables.LinkAction):
 
 class SubnetsTable(tables.DataTable):
     name = tables.Column("name", verbose_name=_("Name"),
-                         link='horizon:project:networks:subnets:detail')
+                         link='horizon:admin:networks:subnets:detail')
     cidr = tables.Column("cidr", verbose_name=_("Network Address"))
     ip_version = tables.Column("ipver_str", verbose_name=_("IP Version"))
     gateway_ip = tables.Column("gateway_ip", verbose_name=_("Gateway IP"))
-    failure_url = reverse_lazy('horizon:project:networks:index')
+    failure_url = reverse_lazy('horizon:admin:networks:index')
 
     def _get_network(self):
         if not hasattr(self, "_network"):

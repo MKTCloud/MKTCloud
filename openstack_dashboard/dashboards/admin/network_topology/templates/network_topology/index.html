@@ -22,12 +22,35 @@ div.network .device:hover div.port {
 <noscript>
 {% trans "This pane needs javascript support." %}
 </noscript>
-<div class="launchButtons">
-<a href="{% url horizon:project:instances:launch %}" id="instances__action_launch" class="btn btn-small btn-launch ajax-modal">{%trans "Launch Instance" %}</a>
-<a href="{% url horizon:admin:networks:create %}" id="networks__action_create" class="btn btn-small ajax-modal btn-create">{%trans "Create Network" %}</a>
-<a href="{% url horizon:admin:routers:create %}" id="Routers__action_create" class="btn btn-small ajax-modal btn-create">{%trans "Create Router" %}</a>
+<div class="row cards">
+ <div class="card-container col-lg-2 col-md-4 col-sm-6 col-xs-12">
+	<div class="card card-green">
+   <a href="{% url horizon:project:instances:launch %}" id="instances__action_launch" class=" btn-launch ajax-modal">
+   <div class="button">
+								<span class="pull-left"><i class="iconfont icon-play media-object"></i></span><h2> {%trans "Launch Instance" %}</h2>
+	</div>
+  </a>
+  </div>
+  </div>
+ <div class="card-container col-lg-2 col-md-4 col-sm-6 col-xs-12">  
+<div class="card card-blue">  
+   <a href="{% url horizon:admin:networks:create %}" id="networks__action_create" class="ajax-modal btn-create">
+    <div class="button">
+								<span class="pull-left"><i class="iconfont icon-network media-object"></i></span><h2> {%trans "Create Network" %}</h2>
+							</div>
+  </a>
 </div>
-
+</div>
+ <div class="card-container col-lg-2 col-md-4 col-sm-6 col-xs-12">
+<div class="card card-blue">  
+<a href="{% url horizon:admin:routers:create %}" id="Routers__action_create" class="ajax-modal btn-create">
+	<div class="button">
+								<span class="pull-left"><i class="iconfont icon-router media-object"></i></span><h2>{%trans "Create Router" %}</h2>
+							</div>
+  </a>
+ </div>
+ </div>
+</div>
 <div id="topologyCanvas">
     <div class="networks"></div>
     <div class="nodata">{% blocktrans %}There are no networks, routers, or connected instances to display. {% endblocktrans %}</div>

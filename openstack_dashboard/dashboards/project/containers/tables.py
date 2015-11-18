@@ -65,7 +65,7 @@ class CreateContainer(tables.LinkAction):
     iconfont = "iconfont icon-folderadd media-object"
     card = "card card-blue"
     url = "horizon:project:containers:create"
-   # classes = ("ajax-modal", "btn-create")
+    classes = ("ajax-modal", "btn-create")
 
 
 class ListObjects(tables.LinkAction):

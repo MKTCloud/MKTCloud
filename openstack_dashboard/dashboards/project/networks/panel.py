@@ -18,12 +18,13 @@ from django.utils.translation import ugettext_lazy as _
 
 import horizon
 
-from openstack_dashboard.dashboards.project import dashboard
+from openstack_dashboard.dashboards.admin import dashboard
 
 
 class Networks(horizon.Panel):
     name = _("Networks")
     slug = 'networks'
     permissions = ('openstack.services.network',)
+    stylecss = 'iconfont icon-wifi'
 
-dashboard.Project.register(Networks)
+dashboard.Admin.register(Networks)

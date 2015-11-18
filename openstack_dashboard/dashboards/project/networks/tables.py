@@ -58,28 +58,39 @@ class DeleteNetwork(CheckNetworkEditable, tables.DeleteAction):
         except:
             msg = _('Failed to delete network %s') % network_id
             LOG.info(msg)
-            redirect = reverse("horizon:project:networks:index")
+            redirect = reverse("horizon:admin:networks:index")
             exceptions.handle(request, msg, redirect=redirect)
 
 
 class CreateNetwork(tables.LinkAction):
     name = "create"
     verbose_name = _("Create Network")
-    url = "horizon:project:networks:create"
+    iconfont = "iconfont icon-network media-object"
+    card = "card card-blue"
+    url = "horizon:admin:networks:create"
     classes = ("ajax-modal", "btn-create")
 
+class CreateSubNetwork(tables.LinkAction):
+    name = "createsub"
+    verbose_name = _("Create SubNetwork")
+    iconfont = "iconfont icon-tree media-object"
+    card = "card card-green"
+    url = "horizon:admin:networks:create"
+    classes = ("ajax-modal", "btn-create")
 
 class EditNetwork(CheckNetworkEditable, tables.LinkAction):
     name = "update"
     verbose_name = _("Edit Network")
-    url = "horizon:project:networks:update"
+    url = "horizon:admin:networks:update"
     classes = ("ajax-modal", "btn-edit")
 
 
 class CreateSubnet(CheckNetworkEditable, tables.LinkAction):
     name = "subnet"
     verbose_name = _("Add Subnet")
-    url = "horizon:project:networks:addsubnet"
+    iconfont = "iconfont icon-tree media-object"
+    card = "card card-green"
+    url = "#"
     classes = ("ajax-modal", "btn-create")
 
 
@@ -92,7 +103,7 @@ def get_subnets(network):
 class NetworksTable(tables.DataTable):
     name = tables.Column("name",
                          verbose_name=_("Name"),
-                         link='horizon:project:networks:detail')
+                         link='horizon:admin:networks:detail')
     subnets = tables.Column(get_subnets,
                             verbose_name=_("Subnets Associated"),)
     shared = tables.Column("shared", verbose_name=_("Shared"),
@@ -104,5 +115,5 @@ class NetworksTable(tables.DataTable):
     class Meta:
         name = "networks"
         verbose_name = _("Networks")
-        table_actions = (CreateNetwork, DeleteNetwork)
+        table_actions = (CreateNetwork,CreateSubnet)
         row_actions = (EditNetwork, CreateSubnet, DeleteNetwork)

@@ -28,6 +28,6 @@ from openstack_dashboard.dashboards.admin import dashboard
 class Quotas(horizon.Panel):
     name = _("System Info")
     slug = 'info'
-    stylecss = 'iconfont icon-mylibrarybooks'
+    stylecss = 'iconfont icon-site media-object'
 
 dashboard.Admin.register(Quotas)

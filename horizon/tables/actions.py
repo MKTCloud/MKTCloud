@@ -32,7 +32,7 @@ from horizon.utils import html, functions
 LOG = logging.getLogger(__name__)
 
 # For Bootstrap integration; can be overridden in settings.
-ACTION_CSS_CLASSES = ("btn", "btn-small")
+ACTION_CSS_CLASSES = ("", )
 STRING_SEPARATOR = "__"
 
 
@@ -618,6 +618,7 @@ class DeleteAction(BatchAction):
         raise NotImplementedError("DeleteAction must define a delete method.")
 
     def get_default_classes(self):
-        classes = super(DeleteAction, self).get_default_classes()
-        classes += ("btn-danger", "btn-delete")
+        classes = "";
+#        classes = super(DeleteAction, self).get_default_classes()
+#        classes += ("btn-danger", "btn-delete")
         return classes

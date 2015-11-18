@@ -36,7 +36,7 @@ class CreateVolume(tables.LinkAction):
     iconfont = "iconfont icon-drive media-object"
     card = "card card-blue"
     attrs={"data-toggle": "modal"}
-    url = "#modalConfirm"
+    url = "horizon:project:volumes:create"
     classes = ("ajax-modal", "btn-create")
     
 class DeleteVolume(tables.LinkAction):
@@ -45,7 +45,7 @@ class DeleteVolume(tables.LinkAction):
     iconfont = "iconfont icon-delete media-object"
     card = "card card-red"
     attrs={"data-toggle": "modal"}
-    url = "#modalConfirm"
+    url = "horizon:project:volumes:delete"
     classes = ("ajax-modal", "btn-create")
 
 
@@ -56,7 +56,7 @@ class DeleteVolumeSnapshot(tables.DeleteAction):
     action_past = _("Scheduled deletion of")
     verbose_name = _("Delete Alarm")
     attrs={"data-toggle": "modal"}
-    url = "#modalConfirm"
+    url = "horizon:project:volumes:delete"
     classes = ("ajax-modal", "btn-create")
 
     def delete(self, request, obj_id):
